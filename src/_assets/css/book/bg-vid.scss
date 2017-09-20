@@ -1,0 +1,32 @@
+
+
+.bg-vid {
+  position:absolute;
+  top:0;
+  z-index: -1;
+
+  min-height: 100vh;
+  min-width:100vw;
+
+
+  background-color : white;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+
+
+  &--home{   background-image: url('/_assets/img/P1090708.png');}
+
+}
+
+
+
+
+
+.bg-vid__calc-sup {
+  position:absolute;
+  display:block;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6
+}
