@@ -21,7 +21,8 @@
     "gulp-cssbeautify": "latest",
     "gulp-autoprefixer": "latest",
     "gulp-imagemin": "latest",
-    "gulp-cleanhtml": "latest"
+    "gulp-cleanhtml": "latest",
+    "gulp-svgmin": "latest"
   },
   "dependencies": {
     "animate.css": "^3.5.2",
