@@ -44,7 +44,31 @@ gulp.task('clean', function () {
 
 
 // Taches sur CSS
+//
+// cd C:\wamp64\www\yann-lorgueilleux.info\book && gulp compil-foundation
+gulp.task('compil-foundation', function () {
+ console.log('BUIL ===================== TACHES : compil foundation =======================');
+  return gulp.src('src/_assets/_vendors/foundation-6.4.2/scss/my-foundation-compil.scss')
 
+
+
+    .pipe(plugins.plumber())
+    .pipe(plugins.sass().on('error', plugins.sass.logError))
+
+    //.pipe(plugins.csscomb())
+    //.pipe(plugins.cssbeautify({indent: '  '}))
+    //.pipe(plugins.autoprefixer())
+
+    .pipe(gulp.dest('src/_assets/css/'))
+
+    // Synchronisation du navigateur
+    .pipe(browserSync.reload({
+      stream: true
+    }))
+    ;
+});
+
+//
 // cd C:\wamp64\www\yann-lorgueilleux.info\book && gulp compil-scss
 gulp.task('prepare-css', function () {
  console.log('BUIL ===================== TACHES : prepare-css =======================');
@@ -185,7 +209,7 @@ gulp.task('cleanhtml', function(){
 
 // lancements automatiques
 gulp.task('watch', ['browserSync' ] , function(){
-  gulp.watch('src/_assets/**/*.scss', ['prepare-css']);
+  gulp.watch('src/_assets/**/*.scss', ['buildcss']);
   // Other watchers
   gulp.watch('src/{,_includes/}*.html',{cwd:'./'}, ['inserthtml'] , browserSync.reload);
   gulp.watch('src/_assets/{,img/}**/*.+(png|jpg|gif|svg)',{cwd:'./'}, ['duplicimages'] , browserSync.reload);
@@ -219,9 +243,16 @@ gulp.task('browserSyncProd', function() {
 // cd C:\wamp64\www\yann-lorgueilleux.info\book && gulp build
 //gulp.task('build', ['scss', 'inserthtml' , 'browserSync'] );
 
+gulp.task('buildcss', function(callback) {
+  runSequence( 'compil-foundation',
+                ['prepare-css', ],
+              callback);
+});
+
+
 
 gulp.task('build', function(callback) {
-  runSequence( ['prepare-css', 'inserthtml' , 'duplicimages'],
+  runSequence( ['buildcss', 'inserthtml' , 'duplicimages'],
 
               callback);
 });

@@ -1,23 +1,22 @@
-//@import "vendors/foundation-6.3.1/css/foundation";
-
-
-@import "../_vendors/foundation-6.4.2/scss/foundation";
-
-//@import "../_vendors/animate.css/animate";
+//FOUNDATION
+@import "my-foundation-compil";
 
 
 
-//@import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,900');
+@import "../_vendors/animate.css/animate";
 
 
 
-//@import "book/bg-vid";
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,900');
+
+
+@import "book/bg-vid";
 
 
 .titre-principal {
+  color: #0a0a0a;
   font-family: 'Titillium Web', sans-serif;
   font-size: 6.5rem;
-  color: #0a0a0a;
   font-weight: 200;
 }
 
