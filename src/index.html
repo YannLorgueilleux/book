@@ -1,29 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>titre</title>
 
-
-
+    <meta charset="utf-8">
     <link rel="stylesheet" href="_assets/css/styles.css">
-
-
-
-
   </head>
   <body>
 
     <!-- @@include _includes/menu.html {"active":"page0"} -->
-    <!-- @@include _includes/bg-vid.html {"page":"home"} -->
 
-<div class="row">
-    <h2 class="titre-principal animated zoomInLeft">designer UX / UI</h2>
+    <div id="fullpage">
+
+    	<div class="section">
+
+        <!-- @@include _includes/bg-vid.html {"page":"home"} -->
+        <div class="row">
+            <h1 class="identite">Yann LORGUEILLEUX</h1>
+            <h2 class="titre-principal animated zoomInLeft">designer UX / UI</h2>
+            <h2 class="titre-principal animated zoomInLeft">integrateur Web</h2>
+        </div>
+
+      </div>
 
 
-dd
+    	<div class="section">Some section</div>
+    	<div class="section">Some section</div>
+    	<div class="section">
+        <div class="slide"> Slide 1 </div>
+      	<div class="slide"> Slide 2 </div>
+      	<div class="slide"> Slide 3 </div>
+      	<div class="slide"> Slide 4 </div>
+      </div>
+
+    </div>
 
 
 
-</div>
+    <!--build:js _assets/js/main.min.js -->
+    <script type="text/javascript" src="_assets/_vendors/jQuery/jquery-3.2.1.min.js"></script>
+    <!-- endbuild -->
+
+
+
+    <!--build:js _assets/js/home.min.js -->
+    <script type="text/javascript" src="_assets/_vendors/fullPage.js/dist/jquery.fullpage.js"></script>
+    <script type="text/javascript" src="_assets/js/accueil.js"></script>
+    <!-- endbuild -->
 
 
 

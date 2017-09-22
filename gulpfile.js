@@ -73,6 +73,19 @@ gulp.task('build-scss', function () {
 });
 
 
+// Tâche de concatenation des JS
+// cd C:\wamp64\www\yann-lorgueilleux.info\book && gulp build-js
+var useref = require('gulp-useref');
+
+gulp.task('build-js', function(){
+  console.log('BUIL ===================== TACHES : prepare-js =======================');
+  return gulp.src('src/*.html')
+    .pipe(useref())
+    .pipe(gulp.dest('tmp'))
+});
+
+
+
 
 
 // INSERTION de blocs  HTML
@@ -81,7 +94,7 @@ var extender = require('gulp-html-extend')
 gulp.task('inserthtml', function () {
   console.log('BUILD ===================== TACHES : INSERT HTML =======================');
   return gulp.src(
-    'src/{,_includes/}/{,livres/}*.html'
+    'tmp/{,_includes/}/{,livres/}*.html'
     //  ['src/*.html'] , //select all files html du niveau 1
     )
     .pipe(plugins.plumber())
@@ -98,8 +111,18 @@ gulp.task('inserthtml', function () {
 });
 
 
+// Tâche dupliques les _INCLUDE
+gulp.task('tmp-includes', function(){
+  console.log('===================== TACHES : DUPLIQUE INCLUDES =======================');
+  gulp.src(['src/_includes/**/*'])
+    .pipe(gulp.dest('tmp/_includes'))
+    // Synchronisation du navigateur
+    //.pipe(browserSync.reload({stream: true}));
+});
+
+
 // Tâche dupliques les IMAGES
-gulp.task('build-img', function(){
+gulp.task('tmp-img', function(){
   console.log('===================== TACHES : DUPLIQUE IMAGES =======================');
   gulp.src(['src/_assets/img/**/*'])
     .pipe(gulp.dest('tmp/_assets/img'))
@@ -108,7 +131,7 @@ gulp.task('build-img', function(){
 });
 
 // Tâche dupliques les IMAGES
-gulp.task('build-svg', function(){
+gulp.task('tmp-svg', function(){
   console.log('===================== TACHES : DUPLIQUE SVG =======================');
   gulp.src(['src/_assets/svg/**/*.svg'])
     //.pipe(svgmin())
@@ -195,15 +218,27 @@ gulp.task('critical', function () {
 });
 
 
+
+var minify = require('gulp-minify');
+
+gulp.task('min-js', function() {
+  gulp.src('tmp/_assets/js/*.js')
+    .pipe(minify())
+    .pipe(gulp.dest('dist/_assets/js'))
+});
+
+
 // Tâche cleanHtml
 //remove unneeded whitespaces, line-breaks, comments, etc from the HTML.
 //
 // cd C:\wamp64\www\yann-lorgueilleux.info\book && gulp cleanhtml
 var cleanhtml = require('gulp-cleanhtml');
+var htmlmin = require('gulp-htmlmin');
 
 gulp.task('cleanhtml', function(){
   gulp.src('tmp/**/*.html')
     .pipe(cleanhtml())
+    .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('dist'));
 });
 
@@ -213,14 +248,17 @@ gulp.task('cleanhtml', function(){
 
 // lancements automatiques
 gulp.task('watch', ['browserSync' ] , function(){
-  gulp.watch('src/_assets/**/*.scss', ['buildcss']);
+  gulp.watch('src/_assets/**/*.scss', ['build-styles']);
   // Other watchers
-  gulp.watch('src/{,_includes/}*.html',{cwd:'./'}, ['inserthtml'] , browserSync.reload);
-  gulp.watch('src/_assets/{,img/}**/*.+(png|jpg|gif)',{cwd:'./'}, ['build-img'] , browserSync.reload);
-  gulp.watch('src/_assets/{,svg/}**/*.svg',{cwd:'./'}, ['build-svg'] , browserSync.reload);
-//  gulp.watch('src/js/**/*.js', browserSync.reload);
+  gulp.watch('src/{,_includes/}*.html',{cwd:'./'},  ['build-html'] , browserSync.reload  );
+  gulp.watch('src/_assets/{,img/}**/*.+(png|jpg|gif)',{cwd:'./'}, ['tmp-img'] , browserSync.reload);
+  gulp.watch('src/_assets/{,svg/}**/*.svg',{cwd:'./'}, ['tmp-svg'] , browserSync.reload);
 
-  gulp.watch('tmp/**/*.html' , browserSync.reload);
+
+  gulp.watch('src/_assets/{,js/}**/*.js',{cwd:'./'},  ['build-html'] , browserSync.reload  );
+
+
+//  gulp.watch('tmp/**/*.html' , browserSync.reload);
 })
 
 
@@ -228,7 +266,7 @@ gulp.task('watch', ['browserSync' ] , function(){
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {
-      baseDir:[ 'tmp', 'dist']
+      baseDir: 'tmp'
     },
   })
 })
@@ -249,20 +287,21 @@ gulp.task('browserSyncProd', function() {
 //gulp.task('build', ['scss', 'inserthtml' , 'browserSync'] );
 
 gulp.task('build-styles', function(callback) {
-  runSequence( 'build-foundation',
-                ['build-scss', ],
-              callback);
+  runSequence( 'build-foundation', ['build-scss', ] ,  callback);
+});
+
+gulp.task('tmp-ressources', function(callback) {
+  runSequence( [ 'tmp-svg' ] , ['tmp-img'],  callback);
+});
+
+gulp.task('build-html', function(callback) {
+  runSequence( ['tmp-includes' , 'build-js'] , ['inserthtml'] ,  callback)
 });
 
 
-gulp.task('build-ressources', function(callback) {
-  runSequence( ['build-img' , 'build-svg' ],
-              callback);
-});
 
 gulp.task('build', function(callback) {
-  runSequence( ['build-styles', 'build-ressources' , 'inserthtml' ],
-              callback);
+  runSequence( ['build-styles', 'tmp-ressources'  ] , ['build-html'] , 'watch' ,callback);
 });
 
 
@@ -275,6 +314,7 @@ gulp.task('build', function(callback) {
 gulp.task('prod', function(callback) {
   runSequence('minifycss',
               ['critical' ,'minImages','minsvg'],
+              'min-js',
               'cleanhtml',
               'browserSyncProd',
               callback);
@@ -282,4 +322,4 @@ gulp.task('prod', function(callback) {
 
 // Tâche par défaut
  // cd C:\wamp64\www\yann-lorgueilleux.info\book && gulp
-gulp.task('default', ['build', 'watch']);
+gulp.task('default', ['build']);

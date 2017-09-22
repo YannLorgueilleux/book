@@ -1,23 +1,31 @@
 //FOUNDATION
-@import "my-foundation-compil";
-
-
+@import "my-foundation";
 
 @import "../_vendors/animate.css/animate";
-
+@import "../_vendors/fullPage.js/dist/jquery.fullpage";
 
 
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,900');
 
-
+@import "book/menu-global";
 @import "book/bg-vid";
+@import "book/stikers";
 
+
+
+.identite {
+  color: #fff;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+}
 
 .titre-principal {
   color: #0a0a0a;
   font-family: 'Titillium Web', sans-serif;
-  font-size: 6.5rem;
+  font-size: 4.5rem;
   font-weight: 200;
+  line-height: 0.8em;
 }
 
 
@@ -35,6 +43,5 @@
 .page0--active-page0,
 .page1--active-page1,
 .page2--active-page2{
-
   text-decoration: underline;
 }
