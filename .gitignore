@@ -11,7 +11,7 @@ bin-release/
 
 node_modules/**/*
 tmp/**/*
-dist/**/*
+
 .gulp-scss-cache
 .sass-cache
 
