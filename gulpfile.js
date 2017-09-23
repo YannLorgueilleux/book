@@ -265,6 +265,7 @@ gulp.task('watch', ['browserSync' ] , function(){
 // Synchronisation du navigateur
 gulp.task('browserSync', function() {
   browserSync.init({
+    browser: ["chrome"],
     server: {
       baseDir: 'tmp'
     },
@@ -274,6 +275,7 @@ gulp.task('browserSync', function() {
 // Synchronisation du navigateur
 gulp.task('browserSyncProd', function() {
   browserSync.init({
+    browser: ["google chrome", "firefox"],
     server: {
       baseDir: 'dist'
     },

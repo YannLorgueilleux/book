@@ -1,5 +1,7 @@
 //FOUNDATION
 @import "my-foundation";
+//@import "foundation";
+
 
 @import "../_vendors/animate.css/animate";
 @import "../_vendors/fullPage.js/dist/jquery.fullpage";
@@ -16,27 +18,39 @@
 .identite {
   color: #fff;
   font-family: 'Titillium Web', sans-serif;
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 900;
 }
 
 .titre-principal {
   color: #0a0a0a;
   font-family: 'Titillium Web', sans-serif;
-  font-size: 4.5rem;
+  font-size: 48px;
   font-weight: 200;
   line-height: 0.8em;
+
+}
+
+.identite,
+.titre-principal {
+    text-align: center;
+    /* Medium and up */
+    //@media screen and (min-width: 40em) { text-align: left }
+
 }
 
 
 
+
+
+
 .degrad--bleu{
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#87e0fd+0,53cbf1+40,ff07e2+100 */
-  background: #87e0fd; /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #87e0fd 0%, #53cbf1 40%, #ff07e2 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #87e0fd 0%,#53cbf1 40%,#ff07e2 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #87e0fd 0%,#53cbf1 40%,#ff07e2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#ff07e2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  // Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#87e0fd+0,53cbf1+40,ff07e2+100
+  background: #87e0fd;
+  background: -moz-linear-gradient(-45deg, #87e0fd 0%, #53cbf1 40%, #ff07e2 100%);
+  background: -webkit-linear-gradient(-45deg, #87e0fd 0%,#53cbf1 40%,#ff07e2 100%);
+  background: linear-gradient(135deg, #87e0fd 0%,#53cbf1 40%,#ff07e2 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#ff07e2',GradientType=1 );
 }
 
 
