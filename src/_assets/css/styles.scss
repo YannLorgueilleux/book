@@ -1,19 +1,30 @@
+// Fonts
+//@import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,900');
+
+
+
 //FOUNDATION
 @import "my-foundation";
-//@import "foundation";
 
-
+//VENDORS
 @import "../_vendors/animate.css/animate";
 @import "../_vendors/fullPage.js/dist/jquery.fullpage";
 
 
-@import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,900');
 
+
+
+
+@import "book/interface";
 @import "book/menu-global";
 @import "book/bg-vid";
 @import "book/stikers";
+@import "book/tech";
+
+@import "book/projets";
 
 
+@import "book/_couleurs";
 
 .identite {
   color: #fff;
@@ -58,4 +69,29 @@
 .page1--active-page1,
 .page2--active-page2{
   text-decoration: underline;
+}
+
+
+
+// Color blocks used on the Global Styles page.
+
+.docs-color-block {
+  border: 1px solid $coul-3--black;
+  padding: .5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 10px;
+
+  > div:first-child {
+    width: 100%;
+    height: 50px;
+    margin-bottom: .5rem;
+  }
+
+  > p {
+    margin: 0;
+  }
+
+
+
 }

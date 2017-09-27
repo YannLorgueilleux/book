@@ -1,0 +1,49 @@
+//  Gamme Couleurs
+
+
+$coul-1--thin    : #d8fbff;
+$coul-1--light   : #2df3ff;
+$coul-1          : #00c2ff;
+$coul-1--medium  : #0276f1;
+$coul-1--bold    : #004dc2;
+$coul-1--black   : #00203b;
+
+
+$coul-2--thin    : #eee;
+$coul-2--light   : #eee;
+$coul-2          : #ff07e2;
+$coul-2--medium  : #eee;
+$coul-2--bold    : #003a76;
+$coul-2--black   : #eee;
+
+
+$coul-3--thin    : #f3f2f1;
+$coul-3--light   : #e7e2dc;
+$coul-3          : #b3abab;
+$coul-3--medium  : #79706f;
+$coul-3--bold    : #363636;
+$coul-3--black   : #1b1b1b;
+
+
+.u-bg {
+  &--coul-1          { background: $coul-1; }
+  &--coul-1--thin    { background: $coul-1--thin; }
+  &--coul-1--light   { background: $coul-1--light; }
+  &--coul-1--medium  { background: $coul-1--medium; }
+  &--coul-1--bold    { background: $coul-1--bold; }
+  &--coul-1--black   { background: $coul-1--black; }
+
+  &--coul-2          { background: $coul-2; }
+  &--coul-2--thin    { background: $coul-2--thin; }
+  &--coul-2--light   { background: $coul-2--light; }
+  &--coul-2--medium  { background: $coul-2--medium; }
+  &--coul-2--bold    { background: $coul-2--bold; }
+  &--coul-2--black   { background: $coul-2--black; }
+
+  &--coul-3          { background: $coul-3; }
+  &--coul-3--thin    { background: $coul-3--thin; }
+  &--coul-3--light   { background: $coul-3--light; }
+  &--coul-3--medium  { background: $coul-3--medium; }
+  &--coul-3--bold    { background: $coul-3--bold; }
+  &--coul-3--black   { background: $coul-3--black; }
+}

@@ -131,7 +131,7 @@ $button-transition: background-color 0.25s ease-out, color 0.25s ease-out !defau
 /// @param {Color} $background-hover [$button-background-hover] - Background color of the button on hover. Set to `auto` to have the mixin automatically generate a hover color.
 /// @param {Color} $color [$button-color] - Text color of the button. Set to `auto` to automatically generate a color based on the background color.
 @mixin button-style(
-  $background: $button-background,
+  $background: red,
   $background-hover: $button-background-hover,
   $color: $button-color,
   $background-hover-lightness: $button-background-hover-lightness

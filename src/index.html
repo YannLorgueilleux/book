@@ -9,57 +9,75 @@
 
     <link rel="stylesheet" href="_assets/css/styles.css">
   </head>
-  <body>
+  <body class="home">
+
+
 
     <!-- @@include _includes/menu.html {"active":"page0"} -->
 
+    <div id="barba-wrapper">
+      <div class="barba-container"  data-namespace="home">
+
+        <div id="fullpage">
 
 
-    <div id="fullpage">
+
+        	<div class="section" style="min-height:100vh">
+
+            <img class="indicateur-scrolldown animated fadeInUp" src="_assets/img/interface/down-fff.png" />
+
+            <!-- @@include _includes/bg-vid.html {"page":"home"} -->
+
+            <div class="grid-container">
+              <div class="grid-x">
+                <div class="small-12 medium-6 cell">
+                  <h1 class="identite">Yann LORGUEILLEUX</h1>
+                  <h2 class="titre-principal animated zoomInLeft">designer UX / UI</h2>
+                  <h2 class="titre-principal animated zoomInLeft">integrateur Web</h2>
+                  <p>Parcequ'un bon design ce doit de connaitres les contraintes techniques pour les transcender</p>
+                  <p>Parcequ'un intégrateur </p>
+                </div>
+              </div>
+            </div>
 
 
 
-    	<div class="section" style="min-height:100vh">
-
-        <!-- @@include _includes/bg-vid.html {"page":"home"} -->
-        <div class="row">
-          <div class="small-12 medium-6 column">
-            <h1 class="identite">Yann LORGUEILLEUX</h1>
-            <h2 class="titre-principal animated zoomInLeft">designer UX / UI</h2>
-            <h2 class="titre-principal animated zoomInLeft">integrateur Web</h2>
           </div>
+
+
+        	<div class="section">
+            <div class="slide">
+              <!-- @@include _includes/savoir-faire.html {"page":"home"} -->
+              <!-- @@include _includes/tech.html -->
+            </div>
+          </div>
+
+
+        	<div class="section">
+
+            <!-- @@include _includes/long-contenu.html {"page":"home"} -->
+
+          </div>
+
+          <div class="section">
+
+            <div class="slide"> Slide 1 </div>
+          	<div class="slide">
+              <!-- @@include _includes/long-contenu.html {"page":"home"} -->
+            </div>
+
+          </div>
+
         </div>
 
-      </div>
 
-
-    	<div class="section">
-
-        <div class="slide">
-          <!-- @@include _includes/long-contenu.html {"page":"home"} -->
-        </div>
-      </div>
-    	<div class="section">
-
-        <!-- @@include _includes/long-contenu.html {"page":"home"} -->
-
-      </div>
-
-      <div class="section">
-
-        <div class="slide"> Slide 1 </div>
-      	<div class="slide">
-          <!-- @@include _includes/long-contenu.html {"page":"home"} -->
-        </div>
-
-      </div>
-
-    </div>
-
-
+    </div><!-- END : class="barba-container" -->
+  </div><!-- END : id="barba-wrapper" -->
 
     <!--build:js _assets/js/main.min.js -->
     <script type="text/javascript" src="_assets/_vendors/jQuery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="_assets/_vendors/barba.js-master/dist/barba.min.js"></script>
+    <script type="text/javascript" src="_assets/js/commons.js"></script>
     <!-- endbuild -->
 
 
@@ -67,9 +85,8 @@
     <!--build:js _assets/js/home.min.js -->
     <script type="text/javascript" src="_assets/_vendors/fullPage.js/vendors/scrolloverflow.min.js"></script>
     <script type="text/javascript" src="_assets/_vendors/fullPage.js/dist/jquery.fullpage.js"></script>
-    <script type="text/javascript" src="_assets/js/accueil.js"></script>
+    <script type="text/javascript" src="_assets/js/website.home.js"></script>
     <!-- endbuild -->
-
 
 
 

@@ -21,6 +21,7 @@
     "gulp-rename": "latest",
     "gulp-sass": "latest",
     "gulp-svgmin": "latest",
+    "gulp-todo": "latest",
     "gulp-useref": "latest",
     "gulp-util": "latest",
     "merge-stream": "latest",

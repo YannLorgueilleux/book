@@ -80,6 +80,7 @@ var useref = require('gulp-useref');
 gulp.task('build-js', function(){
   console.log('BUIL ===================== TACHES : prepare-js =======================');
   return gulp.src('src/*.html')
+    .pipe(plugins.plumber())
     .pipe(useref())
     .pipe(gulp.dest('tmp'))
 });
@@ -140,6 +141,16 @@ gulp.task('tmp-svg', function(){
     .pipe(browserSync.reload({stream: true}));
 });
 
+
+
+// generate a todo.md from your javascript files
+var todo = require('gulp-todo')
+gulp.task('todo', function() {
+    gulp.src(['src/**/*.+(scss|css|html|js)', '!src/{_assets/_vendors/**}'] )
+        .pipe(todo())
+        .pipe(gulp.dest('./'));
+        // -> Will output a TODO.md with your todos
+});
 
 // PROD==========================================================================
 
@@ -275,7 +286,7 @@ gulp.task('browserSync', function() {
 // Synchronisation du navigateur
 gulp.task('browserSyncProd', function() {
   browserSync.init({
-    browser: ["google chrome", "firefox"],
+    browser: ["chrome", "firefox"],
     server: {
       baseDir: 'dist'
     },
@@ -303,7 +314,7 @@ gulp.task('build-html', function(callback) {
 
 
 gulp.task('build', function(callback) {
-  runSequence( ['build-styles', 'tmp-ressources'  ] , ['build-html'] , 'watch' ,callback);
+  runSequence( ['build-styles', 'tmp-ressources'  ] , ['build-html'] ,'todo' , 'watch' ,callback);
 });
 
 

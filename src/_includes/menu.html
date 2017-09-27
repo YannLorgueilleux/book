@@ -1,7 +1,182 @@
-<ul class="menu-global menu">
-  <li><a class="page0  page0--active-<!-- @@var active --> button" href="index.html">home</a></li>
-  <li><a class="page1  page1--active-<!-- @@var active --> button"href="page1.html">nesw page 1</a></li>
-  <li><a class="page2  page2--active-<!-- @@var active --> button"href="page2.html">page 2</a></li>
-  <li><a class="page3  page3--active-<!-- @@var active --> button"href="page3.html">page 3</a></li>
-  <li><a class="page3  page3--active-<!-- @@var active --> button"href="/webbook/">Blog</a></li>
-</ul>
+<header>
+  <ul class="menu-global menu">
+    <li><a class="page0  page0--active-<!-- @@var active --> button"  href="index.html"   data-transition='section'>home</a></li>
+    <li><a class="page1  page1--active-<!-- @@var active --> button"  href="page1.html"   data-transition='section'>nesw page 1</a></li>
+    <li><a class="page2  page2--active-<!-- @@var active --> button"  href="projets.html" data-transition='section'>projets</a></li>
+    <li><a class="page3  page3--active-<!-- @@var active --> button"  href="page3.html"   data-transition='section'>page 3</a></li>
+    <li><a class="page3  page3--active-<!-- @@var active --> button"  href="/webbook/"    data-transition='section'>Blog</a></li>
+    <li><a class="page3  page3--active-<!-- @@var active --> button"  href="boite-outils.html" data-transition='section'>Boite à outils</a></li>
+    <li><a class="page3  page3--active-<!-- @@var active --> button"  href="styles-guide.html" data-transition='section'>Styles Guide</a></li>
+  </ul>
+</header>
+
+
+
+<!-- MASK de transitions Barba -->
+<!--  // Une inspiration de http://www.volleyball.ca/en  -->
+
+<style>
+
+/* CONTENEUR MASK */
+
+.c-transitions-masks {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 1;
+
+    z-index: -1;
+    z-index: 1;
+  /*background:red;*/
+    -webkit-transition: opacity, z-index;
+    transition: opacity, z-index;
+    -webkit-transition-duration: 0s, 0s;
+    transition-duration: 0s, 0s;
+    -webkit-transition-delay: 1.8s, 1.8s;
+    transition-delay: 1.8s, 1.8s;
+    pointer-events: none;
+}
+
+.o-grid {
+    margin-left: 0;
+    letter-spacing: normal;
+    font-size: 0;
+}
+
+/* BANDEAUX MASK */
+
+
+.c-transitions_mask.-big {
+    width: 15.2883947186vw;
+}
+
+.c-transitions_mask.-small {
+    width: calc((100% - 91.7303683113vw) / 2);
+}
+
+.c-transitions_mask:nth-child(1) {
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+    border-left: none;
+}
+
+.c-transitions_mask:nth-child(2) {
+    -webkit-transition-delay: 0.03s;
+    transition-delay: 0.03s;
+}
+
+.c-transitions_mask:nth-child(3) {
+    -webkit-transition-delay: 0.06s;
+    transition-delay: 0.06s;
+}
+
+.c-transitions_mask:nth-child(4) {
+    -webkit-transition-delay: 0.08s;
+    transition-delay: 0.08s;
+}
+
+.c-transitions_mask:nth-child(5) {
+    -webkit-transition-delay: 0.09s;
+    transition-delay: 0.09s;
+}
+
+.c-transitions_mask:nth-child(6) {
+    -webkit-transition-delay: 0.06s;
+    transition-delay: 0.06s;
+}
+
+.c-transitions_mask:nth-child(7) {
+    -webkit-transition-delay: 0.03s;
+    transition-delay: 0.03s;
+}
+
+.c-transitions_mask:nth-child(8) {
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+
+.c-transitions_mask {
+    position: relative;
+    height: 100%;
+    background-color: #ffffff;
+    border-left-color: #ebebeb;
+    border-left-style: solid;
+    border-left-width: 1px;
+    -webkit-transform: scaleY(0) ;
+    -ms-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transform-origin: center bottom;
+    -ms-transform-origin: center bottom;
+    transform-origin: center bottom;
+    -webkit-transition: -webkit-transform;
+    transition: -webkit-transform;
+    transition: transform;
+    transition: transform, -webkit-transform;
+    -webkit-transition-duration: .7s;
+    transition-duration: .7s;
+    -webkit-transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.o-grid_item, .o-g15, .o-g16, .o-g25, .o-g33, .o-g33_mobile, .o-g40, .o-g50, .o-g50_mobile, .o-g60, .o-g66, .o-g100, .o-grid-partners, .o-grid-digit, .c-staff-carousel-profil.is-small, .c-staff-carousel-profil.is-big {
+    display: inline-block;
+    padding-left: 0;
+    width: 100%;
+    vertical-align: top;
+    font-size: 1rem;
+}
+
+
+/* TRANSITIONS DE SECTIONS */
+
+
+
+
+body.SectionTransitionStep1  .c-transitions-masks {
+      opacity: 1 !important;
+      z-index: 1 !important;
+    }
+
+
+
+body.SectionTransitionStep1  .c-transitions_mask{
+    -webkit-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: center top;
+    -ms-transform-origin: center top;
+    transform-origin: center top;
+    opacity:1;
+  }
+
+
+
+
+body.SectionTransitionStep1  .barba-container.oldContainer{
+    /*  transition-delay: 1.09s;
+      left:100vw;*/
+      /*opacity:0;*/
+  }
+body.SectionTransitionStep1  .barba-container.newContainer{
+      left:0vw;
+      opacity:1;
+  }
+
+
+
+</style>
+<div class="c-transitions-masks o-grid">
+    <div class="c-transitions_mask o-grid_item -small"></div>
+    <div class="c-transitions_mask o-grid_item -big"></div>
+    <div class="c-transitions_mask o-grid_item -big"></div>
+    <div class="c-transitions_mask o-grid_item -big"></div>
+    <div class="c-transitions_mask o-grid_item -big"></div>
+    <div class="c-transitions_mask o-grid_item -big"></div>
+    <div class="c-transitions_mask o-grid_item -big"></div>
+    <div class="c-transitions_mask o-grid_item -small"></div>
+    <figure class="c-transitions-masks_logo">
+      <!--  <svg role="img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/images/sprite.svg#logo-vc-transparent"></use></svg> -->
+    </figure>
+</div>
