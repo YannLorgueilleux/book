@@ -8,10 +8,6 @@
 var gulp = require('gulp');
 // Include plugins
 var plugins = require('gulp-load-plugins')(); // tous les plugins de package.json
-// inclus les autres fichiers Tâche
-//var requireDir = require('require-dir');
-//var tasks = requireDir('./gulp-tasks');
-
 
 // init de browser synchronisation
 var browserSync = require('browser-sync').create();
@@ -19,7 +15,11 @@ var browserSync = require('browser-sync').create();
 // init run Sequence
 var runSequence = require('run-sequence');
 
+// init sourcesMaps
+var sourcemaps = require('gulp-sourcemaps');
 
+// init cache (pour ne pas traiter les fichiers non modifiers)
+var cache = require('gulp-cached');
 
 
 // Variables de chemins
@@ -50,7 +50,9 @@ gulp.task('build-foundation', function () {
  console.log('BUIL ===================== TACHES : compil foundation =======================');
   return gulp.src('src/_assets/_vendors/foundation-6.4.2/scss/my-foundation.scss')
     .pipe(plugins.plumber())
-    .pipe(plugins.sass().on('error', plugins.sass.logError))
+    //.pipe(sourcemaps.init())
+    .pipe((plugins.sass().on('error', plugins.sass.logError)))
+    //.pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('src/_assets/css/'))
     // Synchronisation du navigateur
     .pipe(browserSync.reload({stream: true}))
@@ -63,10 +65,12 @@ gulp.task('build-scss', function () {
  console.log('BUIL ===================== TACHES : prepare-css =======================');
   return gulp.src('src/_assets/css/styles.scss')
     .pipe(plugins.plumber())
-    .pipe(plugins.sass().on('error', plugins.sass.logError))
+    .pipe(sourcemaps.init())
+    .pipe((plugins.sass().on('error', plugins.sass.logError)))
     //.pipe(plugins.csscomb())
     //.pipe(plugins.cssbeautify({indent: '  '}))
-    .pipe(plugins.autoprefixer())
+    //.pipe(plugins.autoprefixer())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('tmp/_assets/css/'))
     // Synchronisation du navigateur
     .pipe(browserSync.reload({stream: true}));
@@ -76,12 +80,17 @@ gulp.task('build-scss', function () {
 // Tâche de concatenation des JS
 // cd C:\wamp64\www\yann-lorgueilleux.info\book && gulp build-js
 var useref = require('gulp-useref');
+var lazypipe = require('lazypipe');
 
 gulp.task('build-js', function(){
   console.log('BUIL ===================== TACHES : prepare-js =======================');
   return gulp.src('src/*.html')
     .pipe(plugins.plumber())
     .pipe(useref())
+    .pipe(useref({}, lazypipe().pipe(sourcemaps.init, { loadMaps: true })))
+    .pipe(sourcemaps.write('.'))
+
+
     .pipe(gulp.dest('tmp'))
 });
 
@@ -100,10 +109,10 @@ gulp.task('inserthtml', function () {
     )
     .pipe(plugins.plumber())
     // Generates HTML includes
-     .pipe(extender({
+     .pipe((extender({
        annotations: false,
        verbose: false
-     })) // default options
+     }))) // default options
 
     .pipe(gulp.dest('tmp'))
 

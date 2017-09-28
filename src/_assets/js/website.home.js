@@ -9,8 +9,11 @@
       $('#fullpage').fullpage({
         scrollOverflow:true,
         navigation: true,
-        scrollBar : false
+        scrollBar : false,
+        bigSectionsDestination : 'bottom'
       });
+      // retouche la hauteur
+      //$('.fp-section , .fp-tableCell').height( ($( window ).height()) - ($( window ).height())*0.10    );
 
      };
     /* Destructruction de fullpage.js */

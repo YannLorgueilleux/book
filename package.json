@@ -2,10 +2,13 @@
   "name": "projet",
   "version": "0.0.1",
   "devDependencies": {
+    "browser-sync": "latest",
+    "critical": "^0.9.1",
     "del": "latest",
     "event-stream": "latest",
     "gulp": "latest",
     "gulp-autoprefixer": "latest",
+    "gulp-cached": "latest",
     "gulp-cleanhtml": "latest",
     "gulp-concat": "latest",
     "gulp-cssbeautify": "latest",
@@ -20,18 +23,18 @@
     "gulp-plumber": "latest",
     "gulp-rename": "latest",
     "gulp-sass": "latest",
+    "gulp-sourcemaps": "latest",
     "gulp-svgmin": "latest",
     "gulp-todo": "latest",
     "gulp-useref": "latest",
     "gulp-util": "latest",
+    "lazypipe": "latest",
     "merge-stream": "latest",
     "require-dir": "latest",
     "run-sequence": "latest"
   },
   "dependencies": {
     "animate.css": "^3.5.2",
-    "browser-sync": "latest",
-    "critical": "^0.9.1",
     "fullpage.js": "^2.9.4"
   }
 }

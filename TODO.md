@@ -1,6 +1,8 @@
 ### TODOs
 | Filename | line # | TODO
 |:------|:------:|:------
+| _assets\js\barba-transitions.js | 121 | promesse d'avoir le fichier script chargé pour lancer l'init
+| _assets\js\commons.js | 59 | promesse d'avoir le fichier script chargé pour lancer l'init
 | _assets\css\book\projets.scss | 28 | mediaQueries
 | _assets\_vendors\foundation-6.4.2\js\foundation.core.js | 183 | consider not making this a jQuery function
 | _assets\_vendors\foundation-6.4.2\js\foundation.core.js | 184 | need way to reflow vs. re-initialize

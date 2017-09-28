@@ -108,15 +108,39 @@ var website = website || {};
         step1: function() {
           console.log ('TRANSITION -> step1()');
            // this.oldContainer is the HTMLElement of the old Container
-           $('body').addClass('SectionTransitionStep1');
-           return $(this.oldContainer).addClass('oldContainer').delay( 800 ).promise();
+          // $('body').addClass('SectionTransitionStep1');
+          return $(this.oldContainer).animate({ opacity: 0 }).promise();
+           //return $(this.oldContainer).addClass('oldContainer').delay( 800 ).promise();
         },
         step2: function() {
           console.log ('TRANSITION -> step2()');
            // this.oldContainer is the HTMLElement of the old Container
-           $('body').removeClass('SectionTransitionStep1');
-           document.body.scrollTop = 0;
-           this.done();
+          // $('body').removeClass('SectionTransitionStep1');
+           //document.body.scrollTop = 0;
+           //this.done();
+
+
+           var _this = this;
+             var $el = $(this.newContainer);
+
+             $(this.oldContainer).hide();
+
+             $el.css({
+               visibility : 'visible',
+               opacity : 0
+             });
+
+             $el.animate({ opacity: 1 }, 400, function() {
+               /**
+                * Do not forget to call .done() as soon your transition is finished!
+                * .done() will automatically remove from the DOM the old Container
+                */
+
+               _this.done();
+             });
+
+
+
         },
       });
       //  ====================================
@@ -215,7 +239,6 @@ var website = website || {};
       console.log('/* Initialisation de page projets */');
       //alert ('projet');
       jQuery('body').addClass('page-projets');
-
      };
     publics.init = function () {
         website.projets.init_page();
