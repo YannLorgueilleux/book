@@ -16,11 +16,11 @@
     <div id="barba-wrapper">
       <div class="barba-container"  data-namespace="home">
 
-        <div id="fullpage">
+        <div class="section-wrapper">
 
 
 
-        	<div class="section " style="min-height:100vh">
+        	<div class="section" style="min-height:100vh">
 
             <img class="indicateur-scrolldown animated fadeInUp" src="_assets/img/interface/down-fff.png" />
 
@@ -43,7 +43,7 @@
           </div>
 
 
-        	<div class="section" style="background-color:red">
+        	<div class="section" style="background-color:red" data-hash="section-hash-name2">
             <div class="slide">
               <!-- @@include _includes/savoir-faire.html {"page":"home"} -->
               <!-- @@include _includes/tech.html -->
@@ -51,20 +51,18 @@
           </div>
 
 
-        	<div class="section" style="background-color:blue">
+        	<div class="section" style="background-color:blue"  data-hash="book">
 
-            <!-- @@include _includes/long-contenu.html {"page":"home"} -->
+            <!-- @@include _includes/sommaire-projets.html {"page":"home"} -->
 
-          </div>
-
-          <div class="section" style="background-color:green">
-
-            <div class="slide"> Slide 1 </div>
-          	<div class="slide">
-              <!-- @@include _includes/long-contenu.html {"page":"home"} -->
-            </div>
 
           </div>
+
+
+
+          <!-- @@include _includes/footer-contacts.html {"page":"home"} -->
+
+
 
         </div>
 
@@ -75,18 +73,43 @@
     <!--build:js _assets/js/main.min.js -->
     <script type="text/javascript" src="_assets/_vendors/jQuery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="_assets/_vendors/barba.js-master/dist/barba.min.js"></script>
+    <script type="text/javascript" src="_assets/_vendors/lazyloadxt/dist/jquery.lazyloadxt.js"></script>
     <script type="text/javascript" src="_assets/js/commons.js"></script>
     <!-- endbuild -->
 
 
 
     <!--build:js _assets/js/home.min.js -->
-    <script type="text/javascript" src="_assets/_vendors/fullPage.js/vendors/scrolloverflow.min.js"></script>
-    <script type="text/javascript" src="_assets/_vendors/fullPage.js/dist/jquery.fullpage.js"></script>
+    <!-- <script type="text/javascript" src="_assets/_vendors/fullPage.js/vendors/scrolloverflow.min.js"></script>
+    <script type="text/javascript" src="_assets/_vendors/fullPage.js/dist/jquery.fullpage.js"></script>-->
+
+    <script type="text/javascript" src="_assets/_vendors/smartscroll-master/smartscroll.min.js"></script>
     <script type="text/javascript" src="_assets/js/website.home.js"></script>
     <!-- endbuild -->
 
-
+<style>
+.section{
+  position:relative;
+  /*min-height: 100vh;*/
+}
+</style>
+    <script>
+      var options = {
+        mode: "set", // "vp", "set"
+        autoHash: true,
+        sectionScroll: true,
+        initialScroll: true,
+        keepHistory: false,
+        sectionWrapperSelector: ".section-wrapper",
+        sectionClass: "section",
+        animationSpeed: 300,
+        headerHash: "header",
+        breakpoint: null,
+        eventEmitter: null,
+        dynamicHeight: false
+      };
+      $.smartscroll(options);
+    </script>
 
 
   </body>

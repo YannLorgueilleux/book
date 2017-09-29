@@ -28,6 +28,7 @@
     "gulp-todo": "latest",
     "gulp-useref": "latest",
     "gulp-util": "latest",
+    "gulp-watch": "latest",
     "lazypipe": "latest",
     "merge-stream": "latest",
     "require-dir": "latest",
@@ -35,6 +36,7 @@
   },
   "dependencies": {
     "animate.css": "^3.5.2",
-    "fullpage.js": "^2.9.4"
+    "fullpage.js": "^2.9.4",
+    "lazyloadxt": "^1.1.0"
   }
 }

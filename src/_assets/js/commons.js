@@ -68,7 +68,7 @@ var website = website || {};
             // The Container has just been removed from the DOM.
             console.log ('HOME | VIEWS ->  onLeaveCompleted() // The Container has just been removed from the DOM.');
             //$.fn.fullpage.destroy();
-            website.home.destroy_fullpage();
+            //website.home.destroy_fullpage();
         }
       });
 
@@ -196,6 +196,26 @@ var website = website || {};
         head.appendChild(script);
     }
 
+    /* AJOUT EFFET ANIMATE;CSS aux elements LAZY */
+    $.extend($.lazyLoadXT, {
+      edgeY:  100,
+      srcAttr: 'data-src',
+      scrollContainer : '.fp-scrollable'
+    });
+     publics.effet_lazy =  function() {
+
+
+       $.lazyLoadXT.onload = function() {
+
+           var $el = $(this);
+           $el
+               .removeClass('lazy-hidden')
+               .addClass('animated fadeInUp delayEffect' );
+       };
+
+
+     };
+
 
 
     /* Aperçu des produits */
@@ -213,6 +233,7 @@ var website = website || {};
 
 
 
+
     /* Retour en haut de page */
     publics.backToTop = function () { alert('backtotop')/* ... */ };
     // On initialise les fonction que l'on souhaite utiliser.
@@ -220,7 +241,7 @@ var website = website || {};
         //website.openMenu();
         //website.search();
         website.barba();
-        //website.Sections.init();
+        website.effet_lazy();
         //website.pageHome.init();
         //pageProjets.init();
     };
@@ -251,6 +272,7 @@ var website = website || {};
 /*******/
 $(function () {
     "use strict";
+    //$.lazyLoadXT.onload.addClass = 'animated bounceOutLeft';
     var specific = $("body").attr("class").split(" ")[0].replace(/-/g, "");
     website.init();
     if (website[specific] !== undefined) {

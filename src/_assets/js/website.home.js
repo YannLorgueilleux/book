@@ -9,20 +9,34 @@
       $('#fullpage').fullpage({
         scrollOverflow:true,
         navigation: true,
-        scrollBar : false,
-        bigSectionsDestination : 'bottom'
+        scrollBar : true,
+        lazyLoading: false
       });
-      // retouche la hauteur
-      //$('.fp-section , .fp-tableCell').height( ($( window ).height()) - ($( window ).height())*0.10    );
-
      };
     /* Destructruction de fullpage.js */
      publics.destroy_fullpage = function() {
         $.fn.fullpage.destroy('all');
      };
 
+     publics.init_smartscroll = function() {
+       var options = {
+         mode: "vp", // "vp", "set"
+         autoHash: true,
+         sectionScroll: true,
+         initialScroll: true,
+         keepHistory: true,
+         sectionWrapperSelector: ".section-wrapper",
+         sectionClass: "section",
+         animationSpeed: 600,
+         headerHash: "header",
+         breakpoint: null,
+         eventEmitter: null,
+         dynamicHeight: false
+       };
+       $.smartscroll(options);
+     };
 
     publics.init = function () {
-        website.home.init_fullpage();
+        //website.home.init_fullpage();
     };
 }(website.home = {}));

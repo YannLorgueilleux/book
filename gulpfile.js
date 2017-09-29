@@ -19,7 +19,7 @@ var runSequence = require('run-sequence');
 var sourcemaps = require('gulp-sourcemaps');
 
 // init cache (pour ne pas traiter les fichiers non modifiers)
-var cache = require('gulp-cached');
+//var cache = require('gulp-cached');
 
 
 // Variables de chemins
@@ -100,19 +100,20 @@ gulp.task('build-js', function(){
 
 // INSERTION de blocs  HTML
 // cd C:\wamp64\www\yann-lorgueilleux.info\book && gulp inserthtml
-var extender = require('gulp-html-extend')
+var extender = require('gulp-html-extend');
+var watch = require('gulp-watch');
+
+
 gulp.task('inserthtml', function () {
   console.log('BUILD ===================== TACHES : INSERT HTML =======================');
-  return gulp.src(
-    'tmp/{,_includes/}/{,livres/}*.html'
-    //  ['src/*.html'] , //select all files html du niveau 1
-    )
+  return gulp.src('tmp/{,_includes/}/*.html')
+
     .pipe(plugins.plumber())
     // Generates HTML includes
-     .pipe((extender({
+     .pipe(extender({
        annotations: false,
        verbose: false
-     }))) // default options
+     })) // default options
 
     .pipe(gulp.dest('tmp'))
 
@@ -161,7 +162,10 @@ gulp.task('todo', function() {
         // -> Will output a TODO.md with your todos
 });
 
+
+
 // PROD==========================================================================
+
 
 
 // Tâche "minify" = minification CSS (destination -> destination)
@@ -224,6 +228,10 @@ gulp.task('critical', function () {
           inline: true,
           minify:true,
           extract: false,
+          // Viewport width
+          width: 360,
+          // Viewport height
+          height: 700,
           css: ['dist/_assets/css/styles.css']}))
         .on('error', function(err) {
           gutil.log(gutil.colors.red(err.message));
@@ -271,6 +279,7 @@ gulp.task('watch', ['browserSync' ] , function(){
   gulp.watch('src/_assets/**/*.scss', ['build-styles']);
   // Other watchers
   gulp.watch('src/{,_includes/}*.html',{cwd:'./'},  ['build-html'] , browserSync.reload  );
+
   gulp.watch('src/_assets/{,img/}**/*.+(png|jpg|gif)',{cwd:'./'}, ['tmp-img'] , browserSync.reload);
   gulp.watch('src/_assets/{,svg/}**/*.svg',{cwd:'./'}, ['tmp-svg'] , browserSync.reload);
 
@@ -337,7 +346,7 @@ gulp.task('prod', function(callback) {
   runSequence('minifycss',
               ['critical' ,'minImages','minsvg'],
               'min-js',
-              'cleanhtml',
+
               'browserSyncProd',
               callback);
 });

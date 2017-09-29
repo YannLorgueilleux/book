@@ -32,6 +32,66 @@
 | _assets\_vendors\foundation-6.4.2\dist\js\foundation.js | 11775 | utilize resize event trigger
 | _assets\_vendors\foundation-6.4.2\scss\components\_button.scss | 83 | Document button-base() mixin
 | _assets\_vendors\foundation-6.4.2\scss\xy-grid\_cell.scss | 166 | Figure out if we need to pass breakpoint in here too.
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 108 | might be useful upstream in jquery itself ?
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 207 | the following $ and $.fn extensions can/probably should be moved into jquery.mobile.core.helpers
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 463 | remove support for widgetEventPrefix
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 628 | remove dual storage
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 886 | create a pull request for jquery ui to trigger this event
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 926 | remove dependency on the page widget for the keepNative.
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 977 | move loader class down into the widget settings
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 1036 | sweet jesus we need to break some of this out
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 1082 | verify that jquery.fn.html is ok to use in both cases here
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 1841 | a lot of duplication between popstate and hashchange
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 1893 | consider allowing for the explicit addition of callbacks
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 1899 | We really only want to set this up once
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 2208 | all this crap is terrible, clean it up
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 2351 | this is hyper confusing and should be cleaned up (ugh so bad)
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 2372 | this is also convoluted and confusing
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 2452 | reconsider name
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 2527 | grab the original event here and use it for the synthetic event in the
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 2556 | Do we really need all these conditions? Comparing location hrefs
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 2573 | it might be better to only add to the history stack
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 2612 | add a check here that `hashchange.navigate` is bound already otherwise it's
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 2654 | first arg to add should be the href, but it causes issues in identifying
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 2670 | consider queueing navigation activity until previous activities have completed
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 2672 | !! move the event bindings into callbacks on the navigate event
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 4306 | handle dialogs again
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 4360 | taging a page with external to make sure that embedded pages aren't removed
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 4679 | preserve the originally passed in path
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 4684 | the property names here are just silly
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 4902 | teach $.mobile.hijackable to operate on raw dom elements so the
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 4949 | teach $.mobile.hijackable to operate on raw dom elements so the link wrapping
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 5014 | overlap in logic from isExternal, rel=external check should be
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 5128 | roll the logic here into the handleHashChange method
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 5441 | remove the buttonMarkup giant selector and move it to the various modules
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 6552 | sort out a better way to track sub pages of the listview this is brittle
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 6792 | rename callback/deprecate and default to the item itself as the first argument
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 7084 | it would be nice to let the browser's handle the clicks and pass them
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 7243 | centralize for all widgets
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 7248 | Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 7353 | Each of these should have comments explain what they're for
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 8106 | Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 8143 | explore plugin registration
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 8161 | values buttonId and menuId are undefined here
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 8300 | possibly aggregate multiple select option classes
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 8543 | this would be nice at the the mobile widget level
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 8807 | remove the dependency on the screen deferred
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 8899 | move blacklist to private method
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 8939 | 
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 8952 | sort out why this._page isn't working
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 9087 | no clear deliniation of what should be here and
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 9176 | this can be moved inside the widget
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 9206 | move inside _create
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 9445 | centralize page removal binding / handling in the page plugin.
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 9448 | extremely confusing dependency on the open method where the pagehide.remove
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 9484 | exceedingly naive method to determine difference
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 9714 | value is undefined at creation
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 9718 | value is undefined at creation
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 9852 | Implement a mechanism to allow widgets to become enhanced in the
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 10862 | BETTER FALLBACK ID HERE
+| _assets\_vendors\lazyloadxt\libs\jquery-mobile\jquery.mobile-1.3.2.js | 11170 | figure out how to simplify this interaction with the initial history entry
+| _assets\_vendors\lazyloadxt\libs\zepto\zepto.js | 841 | clean this up with a better OS/browser seperation:
+| _assets\_vendors\lazyloadxt\libs\qunit\qunit.js | 152 | why??
 | _assets\_vendors\foundation-6.4.2\dist\js\plugins\foundation.core.js | 368 | consider not making this a jQuery function
 | _assets\_vendors\foundation-6.4.2\dist\js\plugins\foundation.core.js | 369 | need way to reflow vs. re-initialize
 | _assets\_vendors\foundation-6.4.2\dist\js\plugins\foundation.offcanvas.js | 742 | improve the regex testing for this.
