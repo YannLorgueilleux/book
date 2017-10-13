@@ -1,0 +1,158 @@
+// Styles associés à la page de listing des projets
+
+
+@import "_couleurs";
+
+
+.page-projets{
+  background:$coul-3--black
+}
+
+
+.projets{
+
+  img {
+      display: block;
+      -webkit-transition: all .5s ease 0s;
+      transition: all .5s ease 0s;
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      transform: scale(1);
+      opacity: 1;
+  }
+
+  // LES ELEMENTS (projets)
+  &__item {
+    position: relative;
+    //height : 300px;
+    // TODO : mediaQueries
+
+
+    &:hover{
+        background-size: 120%;
+    }
+
+
+
+
+    &:nth-child(odd) {
+      //background-color:  $coul-1--thin;
+    }
+    &:nth-child(even) {
+      //background-color: $coul-2--thin;
+    }
+  }
+}
+
+
+
+.projet__lien {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+
+  &:before {
+      content:" ";
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      -webkit-transition: all .5s ease 0s;
+      transition: all .5s ease 0s;
+      opacity: 0;
+      background: -webkit-linear-gradient(top,transparent 0,rgba(0,0,0,.04) 11%,rgba(0,0,0,.13) 26%,rgba(0,0,0,.42) 65%,rgba(0,0,0,.54) 86%,rgba(0,0,0,.6) 98%,rgba(0,0,0,.54) 100%);
+      background: linear-gradient(to bottom,transparent 0,rgba(0,0,0,.04) 11%,rgba(0,0,0,.13) 26%,rgba(0,0,0,.42) 65%,rgba(0,0,0,.54) 86%,rgba(0,0,0,.6) 98%,rgba(0,0,0,.54) 100%);
+  }
+
+  &:hover {
+
+    img {
+        -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        transform: scale(1.2);
+        opacity: .15;
+    }
+
+    &:before {
+        opacity: 1;
+    }
+
+
+    .text-box .caption,
+    .text-box h2,
+    .text-box .arrow-icon {
+        -webkit-transition: all .5s ease 0s;
+        transition: all .5s ease 0s;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .text-box .caption {
+        -webkit-transition-delay: .2s;
+        transition-delay: .2s;
+    }
+
+    .text-box h2 {
+      -webkit-transition-delay: .3s;
+      transition-delay: .3s;
+    }
+    .text-box .arrow-icon {
+          -webkit-transition-delay: .4s;
+          transition-delay: .4s;
+      }
+
+  }
+}
+
+
+
+
+
+.text-box {
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 15px;
+    position: absolute;
+    z-index: 3;
+    right: 60px;
+    bottom: 42px;
+    left: 60px;
+    letter-spacing: .5px;
+    color: #fff;
+
+
+    .caption {
+        -webkit-transform: translateY(20px);
+        -ms-transform: translateY(20px);
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        line-height: 26px;
+        margin: 4px 0 24px;
+        -webkit-transform: translateY(20px);
+        -ms-transform: translateY(20px);
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    .arrow-icon {
+        font-size: 12px;
+        display: inline-block;
+        -webkit-transform: translateY(20px);
+        -ms-transform: translateY(20px);
+        transform: translateY(20px);
+        vertical-align: top;
+        opacity: 0;
+    }
+
+
+
+}

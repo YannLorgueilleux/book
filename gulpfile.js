@@ -8,10 +8,6 @@
 var gulp = require('gulp');
 // Include plugins
 var plugins = require('gulp-load-plugins')(); // tous les plugins de package.json
-// inclus les autres fichiers Tâche
-//var requireDir = require('require-dir');
-//var tasks = requireDir('./gulp-tasks');
-
 
 // init de browser synchronisation
 var browserSync = require('browser-sync').create();
@@ -19,7 +15,11 @@ var browserSync = require('browser-sync').create();
 // init run Sequence
 var runSequence = require('run-sequence');
 
+// init sourcesMaps
+var sourcemaps = require('gulp-sourcemaps');
 
+// init cache (pour ne pas traiter les fichiers non modifiers)
+//var cache = require('gulp-cached');
 
 
 // Variables de chemins
@@ -50,7 +50,9 @@ gulp.task('build-foundation', function () {
  console.log('BUIL ===================== TACHES : compil foundation =======================');
   return gulp.src('src/_assets/_vendors/foundation-6.4.2/scss/my-foundation.scss')
     .pipe(plugins.plumber())
-    .pipe(plugins.sass().on('error', plugins.sass.logError))
+    //.pipe(sourcemaps.init())
+    .pipe((plugins.sass().on('error', plugins.sass.logError)))
+    //.pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('src/_assets/css/'))
     // Synchronisation du navigateur
     .pipe(browserSync.reload({stream: true}))
@@ -63,10 +65,12 @@ gulp.task('build-scss', function () {
  console.log('BUIL ===================== TACHES : prepare-css =======================');
   return gulp.src('src/_assets/css/styles.scss')
     .pipe(plugins.plumber())
-    .pipe(plugins.sass().on('error', plugins.sass.logError))
+    .pipe(sourcemaps.init())
+    .pipe((plugins.sass().on('error', plugins.sass.logError)))
     //.pipe(plugins.csscomb())
     //.pipe(plugins.cssbeautify({indent: '  '}))
-    .pipe(plugins.autoprefixer())
+    //.pipe(plugins.autoprefixer())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('tmp/_assets/css/'))
     // Synchronisation du navigateur
     .pipe(browserSync.reload({stream: true}));
@@ -76,12 +80,17 @@ gulp.task('build-scss', function () {
 // Tâche de concatenation des JS
 // cd C:\wamp64\www\yann-lorgueilleux.info\book && gulp build-js
 var useref = require('gulp-useref');
+var lazypipe = require('lazypipe');
 
 gulp.task('build-js', function(){
   console.log('BUIL ===================== TACHES : prepare-js =======================');
   return gulp.src('src/*.html')
     .pipe(plugins.plumber())
     .pipe(useref())
+    .pipe(useref({}, lazypipe().pipe(sourcemaps.init, { loadMaps: true })))
+    .pipe(sourcemaps.write('.'))
+
+
     .pipe(gulp.dest('tmp'))
 });
 
@@ -91,13 +100,14 @@ gulp.task('build-js', function(){
 
 // INSERTION de blocs  HTML
 // cd C:\wamp64\www\yann-lorgueilleux.info\book && gulp inserthtml
-var extender = require('gulp-html-extend')
+var extender = require('gulp-html-extend');
+var watch = require('gulp-watch');
+
+
 gulp.task('inserthtml', function () {
   console.log('BUILD ===================== TACHES : INSERT HTML =======================');
-  return gulp.src(
-    'tmp/{,_includes/}/{,livres/}*.html'
-    //  ['src/*.html'] , //select all files html du niveau 1
-    )
+  return gulp.src('tmp/{,_includes/}/*.html')
+
     .pipe(plugins.plumber())
     // Generates HTML includes
      .pipe(extender({
@@ -112,9 +122,9 @@ gulp.task('inserthtml', function () {
 });
 
 
-// Tâche dupliques les _INCLUDE
-gulp.task('tmp-includes', function(){
-  console.log('===================== TACHES : DUPLIQUE INCLUDES =======================');
+// Tâche dupliques les _INCLUDES vers le dossier temporaire
+gulp.task('copy-includes-tmp', function(){
+  console.log('===================== TACHES : COPY INCLUDES VERS TMP=======================');
   gulp.src(['src/_includes/**/*'])
     .pipe(plugins.plumber())
     .pipe(gulp.dest('tmp/_includes'))
@@ -124,8 +134,8 @@ gulp.task('tmp-includes', function(){
 
 
 // Tâche dupliques les IMAGES
-gulp.task('tmp-img', function(){
-  console.log('===================== TACHES : DUPLIQUE IMAGES =======================');
+gulp.task('copy-img-tmp', function(){
+  console.log('===================== TACHES : COPY IMAGES VERS TMP =======================');
   gulp.src(['src/_assets/img/**/*'])
     .pipe(plugins.plumber())
     .pipe(gulp.dest('tmp/_assets/img'))
@@ -134,8 +144,8 @@ gulp.task('tmp-img', function(){
 });
 
 // Tâche dupliques les IMAGES
-gulp.task('tmp-svg', function(){
-  console.log('===================== TACHES : DUPLIQUE SVG =======================');
+gulp.task('copy-svg-tmp', function(){
+  console.log('===================== TACHES : COPY SVG VERS TMP=======================');
   gulp.src(['src/_assets/svg/**/*.svg'])
     .pipe(plugins.plumber())
     .pipe(gulp.dest('tmp/_assets/svg/'))
@@ -144,7 +154,20 @@ gulp.task('tmp-svg', function(){
 });
 
 
+
+// generate a todo.md from your javascript files
+var todo = require('gulp-todo')
+gulp.task('todo', function() {
+    gulp.src(['src/**/*.+(scss|css|html|js)', '!src/_assets/_vendors/**/*.+(scss|css|html|js)'] )
+        .pipe(todo())
+        .pipe(gulp.dest('./'));
+        // -> Will output a TODO.md with your todos
+});
+
+
+
 // PROD==========================================================================
+
 
 
 // Tâche "minify" = minification CSS (destination -> destination)
@@ -203,6 +226,7 @@ var critical = require('critical').stream;
 gulp.task('critical', function () {
     console.log('===================== TACHES : CRITICAL =======================');
     return gulp.src('tmp/*.html')
+<<<<<<< HEAD
       .pipe(plugins.plumber())
       .pipe(critical({
         base: 'tmp/',
@@ -220,6 +244,28 @@ gulp.task('critical', function () {
       //   stream: true
       // }))
       ;
+=======
+        .pipe(critical({
+          base: 'tmp/',
+          inline: true,
+          minify:true,
+          extract: false,
+          // Viewport width
+          width: 360,
+          // Viewport height
+          height: 700,
+          css: ['dist/_assets/css/styles.css']}))
+        .on('error', function(err) {
+          gutil.log(gutil.colors.red(err.message));
+        })
+        .pipe(gulp.dest('dist'))
+
+        // Synchronisation du navigateur
+        // .pipe(browserSync.reload({
+        //   stream: true
+        // }))
+        ;
+>>>>>>> 0ad7f9491468d60f6f915edebe475f33e1859b46
 });
 
 
@@ -258,8 +304,9 @@ gulp.task('watch', ['browserSync' ] , function(){
   gulp.watch('src/_assets/**/*.scss', ['build-styles']);
   // Other watchers
   gulp.watch('src/{,_includes/}*.html',{cwd:'./'},  ['build-html'] , browserSync.reload  );
-  gulp.watch('src/_assets/{,img/}**/*.+(png|jpg|gif)',{cwd:'./'}, ['tmp-img'] , browserSync.reload);
-  gulp.watch('src/_assets/{,svg/}**/*.svg',{cwd:'./'}, ['tmp-svg'] , browserSync.reload);
+
+  gulp.watch('src/_assets/{,img/}**/*.+(png|jpg|gif)',{cwd:'./'}, ['copy-img-tmp'] , browserSync.reload);
+  gulp.watch('src/_assets/{,svg/}**/*.svg',{cwd:'./'}, ['copy-svg-tmp'] , browserSync.reload);
 
 
   gulp.watch('src/_assets/{,js/}**/*.js',{cwd:'./'},  ['build-html'] , browserSync.reload  );
@@ -282,7 +329,11 @@ gulp.task('browserSync', function() {
 // Synchronisation du navigateur
 gulp.task('browserSyncProd', function() {
   browserSync.init({
+<<<<<<< HEAD
     browser: ["chrome", "edge"],
+=======
+    browser: ["chrome", "firefox"],
+>>>>>>> 0ad7f9491468d60f6f915edebe475f33e1859b46
     server: {
       baseDir: 'dist'
     },
@@ -299,18 +350,18 @@ gulp.task('build-styles', function(callback) {
   runSequence( 'build-foundation', ['build-scss', ] ,  callback);
 });
 
-gulp.task('tmp-ressources', function(callback) {
-  runSequence( [ 'tmp-svg' ] , ['tmp-img'],  callback);
+gulp.task('copy-ressources', function(callback) {
+  runSequence( [ 'copy-svg-tmp' ] , ['copy-img-tmp'],  callback);
 });
 
 gulp.task('build-html', function(callback) {
-  runSequence( ['tmp-includes' , 'build-js'] , ['inserthtml'] ,  callback)
+  runSequence( [ 'build-js' ,'copy-includes-tmp' ] , ['inserthtml'] ,  callback)
 });
 
 
 
 gulp.task('build', function(callback) {
-  runSequence( ['build-styles', 'tmp-ressources'  ] , ['build-html'] , 'watch' ,callback);
+  runSequence( ['build-styles', 'copy-ressources'  ] , ['build-html'] ,'todo' , 'watch' ,callback);
 });
 
 
@@ -324,7 +375,7 @@ gulp.task('prod', function(callback) {
   runSequence('minifycss',
               ['minImages','minsvg'],
               'min-js',
-              'cleanhtml',
+
               'browserSyncProd',
               callback);
 });

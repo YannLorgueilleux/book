@@ -1,0 +1,16 @@
+// styles liès au bandeau de logos techniques
+
+.tech {
+
+  &__wrapper{
+    background-color: #eee;
+  }
+
+  &__logo {
+
+    height: 60px !important;
+
+    filter:grayscale(100%)
+  }
+
+}

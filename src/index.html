@@ -9,27 +9,127 @@
 
     <link rel="stylesheet" href="_assets/css/styles.css">
   </head>
-  <body>
+  <body class="home">
 
+<<<<<<< HEAD
+=======
+    <!-- @@include _includes/menu.html {"active":"page0"} -->
 
-    <div id="fullpage">
+    <div id="barba-wrapper">
+      <div class="barba-container"  data-namespace="home">
 
+        <div id="fullpage" class="section-wrapper">
+>>>>>>> 0ad7f9491468d60f6f915edebe475f33e1859b46
+
+        	<div class="section" style="min-height:100vh">
+
+<<<<<<< HEAD
     	<div class="section" style="min-height:100vh">
+=======
+            <img class="indicateur-scrolldown animated fadeInUp" src="_assets/img/interface/down-fff.png" />
 
-        <!-- @@include _includes/bg-vid.html {"page":"home"} -->
-        <div class="row">
-          <div class="small-12 medium-6 column">
-            <h1 class="identite">Yann LORGUEILLEUX</h1>
-            <h2 class="titre-principal animated zoomInLeft">designer UX / UI</h2>
-            <h2 class="titre-principal animated zoomInLeft">integrateur Web</h2>
+            <!-- @@include _includes/bg-vid.html {"page":"home"} -->
+
+            <div class="grid-container">
+              <div class="grid-x">
+                <div class="small-12 medium-6 cell">
+                  <h1 class="identite animated fadeInDown">Yann LORGUEILLEUX</h1>
+                  <h2 class="titre-principal animated fadeInDownBig">designer UX / UI</h2>
+                  <h2 class="titre-principal animated fadeInDown">integrateur Web</h2>
+                  <p>Parcequ'un bon design ce doit de connaitres les contraintes techniques pour les transcender</p>
+                  <p>Parcequ'un intégrateur web </p>
+                </div>
+              </div>
+            </div>
+
+
+>>>>>>> 0ad7f9491468d60f6f915edebe475f33e1859b46
+
           </div>
-        </div>
 
-      </div>
 
+<<<<<<< HEAD
     </div>
 
 
 
+=======
+        	<div class="section" style="background-color:yellow" data-hash="section-hash-name2">
+            <div class="slide">
+              <!-- @@include _includes/savoir-faire.html {"page":"home"} -->
+              <!-- @@include _includes/tech.html -->
+            </div>
+          </div>
+
+
+        	<div class="section" style="background-color:blue"  data-hash="book">
+
+            <!-- @@include _includes/sommaire-projets.html {"page":"home"} -->
+
+
+          </div>
+
+
+
+          <!-- @@include _includes/footer-contacts.html {"page":"home"} -->
+
+
+
+        </div>
+
+
+    </div><!-- END : class="barba-container" -->
+  </div><!-- END : id="barba-wrapper" -->
+
+    <!--build:js _assets/js/main.min.js -->
+    <script type="text/javascript" src="_assets/_vendors/jQuery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="_assets/_vendors/barba.js-master/dist/barba.min.js"></script>
+    <!-- <script type="text/javascript" src="_assets/_vendors/lazyloadxt/dist/jquery.lazyloadxt.js"></script> -->
+    <script type="text/javascript" src="_assets/js/commons.js"></script>
+    <!-- endbuild -->
+
+
+
+    <!--build:js _assets/js/home.min.js -->
+    <script type="text/javascript" src="_assets/_vendors/fullPage.js/vendors/scrolloverflow.min.js"></script>
+    <script type="text/javascript" src="_assets/_vendors/fullPage.js/dist/jquery.fullpage.js"></script>
+
+    <!-- <script type="text/javascript" src="_assets/_vendors/smartscroll-master/smartscroll.min.js"></script> -->
+
+    <script type="text/javascript" src="_assets/js/website.home.js"></script>
+    <!-- endbuild -->
+
+<style>
+/*TODO: creer fichier sass pour la section */
+.section{
+  position:relative;
+  /*min-height: 100vh;*/
+}
+</style>
+    <script>
+
+
+
+
+
+      var options = {
+        mode: "set", // "vp", "set"
+        autoHash: true,
+        sectionScroll: true,
+        initialScroll: true,
+        keepHistory: false,
+        sectionWrapperSelector: ".section-wrapper",
+        sectionClass: "section",
+        animationSpeed: 300,
+        headerHash: "header",
+        breakpoint: null,
+        eventEmitter: null,
+        dynamicHeight: false
+      };
+    //  $.smartscroll(options);
+    </script>
+
+<div class="test"></div>
+>>>>>>> 0ad7f9491468d60f6f915edebe475f33e1859b46
   </body>
 </html>
