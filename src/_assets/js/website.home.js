@@ -37,6 +37,7 @@
      };
 
     publics.init = function () {
-        //website.home.init_fullpage();
+        website.home.init_fullpage();
+        //website.effet_lazy();
     };
 }(website.home = {}));

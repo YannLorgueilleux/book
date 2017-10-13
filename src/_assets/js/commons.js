@@ -3,7 +3,7 @@ var website = website || {};
 (function (publics) {
     "use strict";
     var privates = {};
-
+    //TODO: revoir l'init
 
     publics.barba = function () {
 
@@ -18,6 +18,7 @@ var website = website || {};
         {
            case 'section':
             $('body').addClass('SectionTransition');
+            console.log("add body class");
              Barba.Pjax.getTransition = function() {
                return SectionsTransition;
              };
@@ -55,22 +56,24 @@ var website = website || {};
         onEnterCompleted: function() {
           // The Transition has just finished.
           console.log  ('HOME | VIEWS ->  onEnterCompleted()  pageHome // The Transition has just finished..');
-
-          // TODO : promesse d'avoir le fichier script chargé pour lancer l'init
+          //alert ('toto');
+          // TODO: promesse d'avoir le fichier script chargé pour lancer l'init
           website.home.init()
-
         },
         onLeave: function() {
             // A new Transition toward a new page has just started.
             console.log  ('HOME | VIEWS ->  onLeave()  // A new Transition toward a new page has just started.');
+
+
         },
         onLeaveCompleted: function() {
             // The Container has just been removed from the DOM.
             console.log ('HOME | VIEWS ->  onLeaveCompleted() // The Container has just been removed from the DOM.');
             //$.fn.fullpage.destroy();
-            //website.home.destroy_fullpage();
+            website.home.destroy_fullpage();
         }
       });
+
 
 
       //------- PROJETS ------------
@@ -78,9 +81,11 @@ var website = website || {};
         namespace: 'projets',
         onEnter: function() {
             console.log ('PROJETS | VIEWS ->  onEnter() // The new Container is ready and attached to the DOM.');
+            //alert ('The new Container is ready and attached to the DOM');
         },
         onEnterCompleted: function() {
             console.log  ('PROJETS | VIEWS ->  onEnterCompleted()   // The Transition has just finished..');
+            //alert (' The Transition has just finished..');
             website.projets.init();
         },
         onLeave: function() {
@@ -96,28 +101,97 @@ var website = website || {};
       // TRANSITIONS
       // =====================================
       var SectionsTransition = Barba.BaseTransition.extend({
+
+
         start: function() {
         console.log ('TRANSITION -> start()');
           //Promise that will indicate the loading of the next container.
           //this.newContainerLoading.then(this.finish.bind(this));
           Promise
-               .all([this.newContainerLoading, this.step1()])
+               .all([this.newContainerLoading, this.step1() ])
                .then(this.step2.bind(this));
 
         },
+
+
         step1: function() {
           console.log ('TRANSITION -> step1()');
-           // this.oldContainer is the HTMLElement of the old Container
-          // $('body').addClass('SectionTransitionStep1');
-          return $(this.oldContainer).animate({ opacity: 0 }).promise();
-           //return $(this.oldContainer).addClass('oldContainer').delay( 800 ).promise();
+
+          //$('.titre-principal').addClass('animated zoomOutLeft');
+
+          // $("body").css('border' , '2px solid red');
+
+
+          // this.oldContainer is the HTMLElement of the old Container
+          //$('body').addClass('SectionTransitionStep1');
+          //$('.titre-principal').removeClass('zoomInLeft animated').delay( 1800 ).addClass('animated zoomOutLeft');
+
+
+          //return $(this.oldContainer).animate({ opacity: 0 }).promise();
+          //return $(this.oldContainer).addClass('oldContainer').delay( 800 ).promise();
+
+
+          //  function sleep(miliseconds) {
+          //     var currentTime = new Date().getTime();
+          //
+          //     while (currentTime + miliseconds >= new Date().getTime()) {
+          //     }
+          //  }
+          //  //
+          // sleep(2000);
+
         },
+
         step2: function() {
+
+            var _this = this;
+            var $nouveau = $(this.newContainer);
+            var $ancien = $(this.oldContainer);
+
+            console.log($ancien);
+
+
+            $ancien.find('.titre-principal').addClass('animated zoomOutLeft');
+
+
+
+
+            setTimeout(function(){
+              $ancien.hide();
+            }, 1000);
+
+
+            setTimeout(function(){
+              $nouveau.css({
+                visibility : 'visible'
+              });
+                _this.done();
+            }, 1200);
+
+
+        },
+
+        step3: function() {
           console.log ('TRANSITION -> step2()');
+
+
            // this.oldContainer is the HTMLElement of the old Container
-          // $('body').removeClass('SectionTransitionStep1');
+           $('body').removeClass('SectionTransitionStep1');
+           $('body').addClass('SectionTransitionStep2');
            //document.body.scrollTop = 0;
            //this.done();
+           //
+          //  function sleep(miliseconds) {
+          //     var currentTime = new Date().getTime();
+           //
+          //     while (currentTime + miliseconds >= new Date().getTime()) {
+          //     }
+          //  }
+          //  //
+          //   sleep(2000);
+
+
+
 
 
            var _this = this;
@@ -135,8 +209,8 @@ var website = website || {};
                 * Do not forget to call .done() as soon your transition is finished!
                 * .done() will automatically remove from the DOM the old Container
                 */
+                _this.done();
 
-               _this.done();
              });
 
 
@@ -148,9 +222,6 @@ var website = website || {};
       //  ====================================
       pageHome.init();
       pageProjets.init();
-
-
-
 
     };
 
@@ -202,8 +273,11 @@ var website = website || {};
       srcAttr: 'data-src',
       scrollContainer : '.fp-scrollable'
     });
-     publics.effet_lazy =  function() {
 
+
+
+
+     publics.effet_lazy =  function() {
 
        $.lazyLoadXT.onload = function() {
 
@@ -212,8 +286,6 @@ var website = website || {};
                .removeClass('lazy-hidden')
                .addClass('animated fadeInUp delayEffect' );
        };
-
-
      };
 
 
@@ -238,10 +310,10 @@ var website = website || {};
     publics.backToTop = function () { alert('backtotop')/* ... */ };
     // On initialise les fonction que l'on souhaite utiliser.
     publics.init = function () {
-        //website.openMenu();
-        //website.search();
+
         website.barba();
-        website.effet_lazy();
+        //website.effet_lazy();
+
         //website.pageHome.init();
         //pageProjets.init();
     };

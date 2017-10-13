@@ -122,9 +122,9 @@ gulp.task('inserthtml', function () {
 });
 
 
-// Tâche dupliques les _INCLUDE
-gulp.task('tmp-includes', function(){
-  console.log('===================== TACHES : DUPLIQUE INCLUDES =======================');
+// Tâche dupliques les _INCLUDES vers le dossier temporaire
+gulp.task('copy-includes-tmp', function(){
+  console.log('===================== TACHES : COPY INCLUDES VERS TMP=======================');
   gulp.src(['src/_includes/**/*'])
     .pipe(gulp.dest('tmp/_includes'))
     // Synchronisation du navigateur
@@ -133,8 +133,8 @@ gulp.task('tmp-includes', function(){
 
 
 // Tâche dupliques les IMAGES
-gulp.task('tmp-img', function(){
-  console.log('===================== TACHES : DUPLIQUE IMAGES =======================');
+gulp.task('copy-img-tmp', function(){
+  console.log('===================== TACHES : COPY IMAGES VERS TMP =======================');
   gulp.src(['src/_assets/img/**/*'])
     .pipe(gulp.dest('tmp/_assets/img'))
     // Synchronisation du navigateur
@@ -142,8 +142,8 @@ gulp.task('tmp-img', function(){
 });
 
 // Tâche dupliques les IMAGES
-gulp.task('tmp-svg', function(){
-  console.log('===================== TACHES : DUPLIQUE SVG =======================');
+gulp.task('copy-svg-tmp', function(){
+  console.log('===================== TACHES : COPY SVG VERS TMP=======================');
   gulp.src(['src/_assets/svg/**/*.svg'])
     //.pipe(svgmin())
     .pipe(gulp.dest('tmp/_assets/svg/'))
@@ -156,7 +156,7 @@ gulp.task('tmp-svg', function(){
 // generate a todo.md from your javascript files
 var todo = require('gulp-todo')
 gulp.task('todo', function() {
-    gulp.src(['src/**/*.+(scss|css|html|js)', '!src/{_assets/_vendors/**}'] )
+    gulp.src(['src/**/*.+(scss|css|html|js)', '!src/_assets/_vendors/**/*.+(scss|css|html|js)'] )
         .pipe(todo())
         .pipe(gulp.dest('./'));
         // -> Will output a TODO.md with your todos
@@ -280,8 +280,8 @@ gulp.task('watch', ['browserSync' ] , function(){
   // Other watchers
   gulp.watch('src/{,_includes/}*.html',{cwd:'./'},  ['build-html'] , browserSync.reload  );
 
-  gulp.watch('src/_assets/{,img/}**/*.+(png|jpg|gif)',{cwd:'./'}, ['tmp-img'] , browserSync.reload);
-  gulp.watch('src/_assets/{,svg/}**/*.svg',{cwd:'./'}, ['tmp-svg'] , browserSync.reload);
+  gulp.watch('src/_assets/{,img/}**/*.+(png|jpg|gif)',{cwd:'./'}, ['copy-img-tmp'] , browserSync.reload);
+  gulp.watch('src/_assets/{,svg/}**/*.svg',{cwd:'./'}, ['copy-svg-tmp'] , browserSync.reload);
 
 
   gulp.watch('src/_assets/{,js/}**/*.js',{cwd:'./'},  ['build-html'] , browserSync.reload  );
@@ -321,18 +321,18 @@ gulp.task('build-styles', function(callback) {
   runSequence( 'build-foundation', ['build-scss', ] ,  callback);
 });
 
-gulp.task('tmp-ressources', function(callback) {
-  runSequence( [ 'tmp-svg' ] , ['tmp-img'],  callback);
+gulp.task('copy-ressources', function(callback) {
+  runSequence( [ 'copy-svg-tmp' ] , ['copy-img-tmp'],  callback);
 });
 
 gulp.task('build-html', function(callback) {
-  runSequence( ['tmp-includes' , 'build-js'] , ['inserthtml'] ,  callback)
+  runSequence( [ 'build-js' ,'copy-includes-tmp' ] , ['inserthtml'] ,  callback)
 });
 
 
 
 gulp.task('build', function(callback) {
-  runSequence( ['build-styles', 'tmp-ressources'  ] , ['build-html'] ,'todo' , 'watch' ,callback);
+  runSequence( ['build-styles', 'copy-ressources'  ] , ['build-html'] ,'todo' , 'watch' ,callback);
 });
 
 

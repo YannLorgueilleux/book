@@ -16,9 +16,7 @@
     <div id="barba-wrapper">
       <div class="barba-container"  data-namespace="home">
 
-        <div class="section-wrapper">
-
-
+        <div id="fullpage" class="section-wrapper">
 
         	<div class="section" style="min-height:100vh">
 
@@ -29,11 +27,11 @@
             <div class="grid-container">
               <div class="grid-x">
                 <div class="small-12 medium-6 cell">
-                  <h1 class="identite">Yann LORGUEILLEUX</h1>
-                  <h2 class="titre-principal animated zoomInLeft">designer UX / UI</h2>
-                  <h2 class="titre-principal animated zoomInLeft">integrateur Web</h2>
+                  <h1 class="identite animated fadeInDown">Yann LORGUEILLEUX</h1>
+                  <h2 class="titre-principal animated fadeInDownBig">designer UX / UI</h2>
+                  <h2 class="titre-principal animated fadeInDown">integrateur Web</h2>
                   <p>Parcequ'un bon design ce doit de connaitres les contraintes techniques pour les transcender</p>
-                  <p>Parcequ'un intégrateur </p>
+                  <p>Parcequ'un intégrateur web </p>
                 </div>
               </div>
             </div>
@@ -43,7 +41,7 @@
           </div>
 
 
-        	<div class="section" style="background-color:red" data-hash="section-hash-name2">
+        	<div class="section" style="background-color:yellow" data-hash="section-hash-name2">
             <div class="slide">
               <!-- @@include _includes/savoir-faire.html {"page":"home"} -->
               <!-- @@include _includes/tech.html -->
@@ -73,27 +71,34 @@
     <!--build:js _assets/js/main.min.js -->
     <script type="text/javascript" src="_assets/_vendors/jQuery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="_assets/_vendors/barba.js-master/dist/barba.min.js"></script>
-    <script type="text/javascript" src="_assets/_vendors/lazyloadxt/dist/jquery.lazyloadxt.js"></script>
+    <!-- <script type="text/javascript" src="_assets/_vendors/lazyloadxt/dist/jquery.lazyloadxt.js"></script> -->
     <script type="text/javascript" src="_assets/js/commons.js"></script>
     <!-- endbuild -->
 
 
 
     <!--build:js _assets/js/home.min.js -->
-    <!-- <script type="text/javascript" src="_assets/_vendors/fullPage.js/vendors/scrolloverflow.min.js"></script>
-    <script type="text/javascript" src="_assets/_vendors/fullPage.js/dist/jquery.fullpage.js"></script>-->
+    <script type="text/javascript" src="_assets/_vendors/fullPage.js/vendors/scrolloverflow.min.js"></script>
+    <script type="text/javascript" src="_assets/_vendors/fullPage.js/dist/jquery.fullpage.js"></script>
 
-    <script type="text/javascript" src="_assets/_vendors/smartscroll-master/smartscroll.min.js"></script>
+    <!-- <script type="text/javascript" src="_assets/_vendors/smartscroll-master/smartscroll.min.js"></script> -->
+
     <script type="text/javascript" src="_assets/js/website.home.js"></script>
     <!-- endbuild -->
 
 <style>
+/*TODO: creer fichier sass pour la section */
 .section{
   position:relative;
   /*min-height: 100vh;*/
 }
 </style>
     <script>
+
+
+
+
+
       var options = {
         mode: "set", // "vp", "set"
         autoHash: true,
@@ -108,9 +113,9 @@
         eventEmitter: null,
         dynamicHeight: false
       };
-      $.smartscroll(options);
+    //  $.smartscroll(options);
     </script>
 
-
+<div class="test"></div>
   </body>
 </html>
