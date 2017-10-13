@@ -80,6 +80,7 @@ var useref = require('gulp-useref');
 gulp.task('build-js', function(){
   console.log('BUIL ===================== TACHES : prepare-js =======================');
   return gulp.src('src/*.html')
+    .pipe(plugins.plumber())
     .pipe(useref())
     .pipe(gulp.dest('tmp'))
 });
@@ -115,6 +116,7 @@ gulp.task('inserthtml', function () {
 gulp.task('tmp-includes', function(){
   console.log('===================== TACHES : DUPLIQUE INCLUDES =======================');
   gulp.src(['src/_includes/**/*'])
+    .pipe(plugins.plumber())
     .pipe(gulp.dest('tmp/_includes'))
     // Synchronisation du navigateur
     //.pipe(browserSync.reload({stream: true}));
@@ -125,6 +127,7 @@ gulp.task('tmp-includes', function(){
 gulp.task('tmp-img', function(){
   console.log('===================== TACHES : DUPLIQUE IMAGES =======================');
   gulp.src(['src/_assets/img/**/*'])
+    .pipe(plugins.plumber())
     .pipe(gulp.dest('tmp/_assets/img'))
     // Synchronisation du navigateur
     .pipe(browserSync.reload({stream: true}));
@@ -134,7 +137,7 @@ gulp.task('tmp-img', function(){
 gulp.task('tmp-svg', function(){
   console.log('===================== TACHES : DUPLIQUE SVG =======================');
   gulp.src(['src/_assets/svg/**/*.svg'])
-    //.pipe(svgmin())
+    .pipe(plugins.plumber())
     .pipe(gulp.dest('tmp/_assets/svg/'))
     // Synchronisation du navigateur
     .pipe(browserSync.reload({stream: true}));
@@ -162,7 +165,8 @@ gulp.task('minifycss', function () {
 const imagemin = require('gulp-imagemin');
 gulp.task('minImages', () =>
    gulp.src('tmp/_assets/img/**/*.+(png|jpg|gif)')
-       .pipe(imagemin([
+      .pipe(plugins.plumber())
+      .pipe(imagemin([
           imagemin.gifsicle({interlaced: true}),
           imagemin.jpegtran({progressive: true}),
           imagemin.optipng({optimizationLevel: 5}),
@@ -178,8 +182,8 @@ gulp.task('minImages', () =>
 //const imagemin = require('gulp-imagemin');
 gulp.task('minsvg', () =>
    gulp.src('tmp/_assets/svg/**/*.svg)')
-
-       .pipe(gulp.dest('dist/_assets/svg'))
+      .pipe(plugins.plumber())
+      .pipe(gulp.dest('dist/_assets/svg'))
 );
 
 
@@ -199,22 +203,23 @@ var critical = require('critical').stream;
 gulp.task('critical', function () {
     console.log('===================== TACHES : CRITICAL =======================');
     return gulp.src('tmp/*.html')
-        .pipe(critical({
-          base: 'tmp/',
-          inline: true,
-          minify:true,
-          extract: false,
-          css: ['dist/_assets/css/styles.css']}))
-        .on('error', function(err) {
-          gutil.log(gutil.colors.red(err.message));
-        })
-        .pipe(gulp.dest('dist'))
+      .pipe(plugins.plumber())
+      .pipe(critical({
+        base: 'tmp/',
+        inline: true,
+        minify:true,
+        extract: false,
+        css: ['dist/_assets/css/styles.css']}))
+      .on('error', function(err) {
+        gutil.log(gutil.colors.red(err.message));
+      })
+      .pipe(gulp.dest('dist'))
 
-        // Synchronisation du navigateur
-        // .pipe(browserSync.reload({
-        //   stream: true
-        // }))
-        ;
+      // Synchronisation du navigateur
+      // .pipe(browserSync.reload({
+      //   stream: true
+      // }))
+      ;
 });
 
 
@@ -223,6 +228,7 @@ var minify = require('gulp-minify');
 
 gulp.task('min-js', function() {
   gulp.src('tmp/_assets/js/*.js')
+    .pipe(plugins.plumber())
     .pipe(minify())
     .pipe(gulp.dest('dist/_assets/js'))
 });
@@ -237,6 +243,7 @@ var htmlmin = require('gulp-htmlmin');
 
 gulp.task('cleanhtml', function(){
   gulp.src('tmp/**/*.html')
+    .pipe(plugins.plumber())
     .pipe(cleanhtml())
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('dist'));
@@ -275,7 +282,7 @@ gulp.task('browserSync', function() {
 // Synchronisation du navigateur
 gulp.task('browserSyncProd', function() {
   browserSync.init({
-    browser: ["google chrome", "firefox"],
+    browser: ["chrome", "edge"],
     server: {
       baseDir: 'dist'
     },
@@ -312,10 +319,10 @@ gulp.task('build', function(callback) {
 // cd C:\wamp64\www\yann-lorgueilleux.info\book && gulp prod
 //gulp.task('prod', [ 'minifycss' , 'critical' , 'browserSyncProd']);
 
-
+// 'critical' ,
 gulp.task('prod', function(callback) {
   runSequence('minifycss',
-              ['critical' ,'minImages','minsvg'],
+              ['minImages','minsvg'],
               'min-js',
               'cleanhtml',
               'browserSyncProd',
