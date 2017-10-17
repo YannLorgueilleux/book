@@ -24,20 +24,14 @@ var website = website || {};
              };
            break;
 
-           case 'page':
-             Barba.Pjax.getTransition = function() {
-               return PagesTransition;
+           case 'projet':
+              privates.cloneElement(element);
+
+             Barba.Pjax.getTransition = function(clone) {
+               return ProjetTransition;
              };
            break;
 
-
-           case 'date':
-            $('body').addClass('CvTransition');
-             Barba.Pjax.getTransition = function() {
-               //alert ('clicDate');
-               return CvTransition;
-             };
-           break;
            //default: statement(s)
         }
 
@@ -96,12 +90,63 @@ var website = website || {};
         }
       });
 
+      //------- PROJET ------------
+      var pageProjet = Barba.BaseView.extend({
+        namespace: 'projet',
+        onEnter: function() {
+            console.log ('PROJET | VIEWS ->  onEnter() // The new Container is ready and attached to the DOM.');
+            //alert ('The new Container is ready and attached to the DOM');
+        },
+        onEnterCompleted: function() {
+            console.log  ('PROJET | VIEWS ->  onEnterCompleted()   // The Transition has just finished..');
+            //alert (' The Transition has just finished..');
+            //website.projets.init();
+        },
+        onLeave: function() {
+            console.log  ('PROJET | VIEWS ->  onLeave()  // A new Transition toward a new page has just started.');
+        },
+        onLeaveCompleted: function() {
+            console.log ('PROJET | VIEWS ->  onLeaveCompleted() // The Container has just been removed from the DOM.');
+        }
+      });
 
       //  ====================================
       // TRANSITIONS
       // =====================================
-      var SectionsTransition = Barba.BaseTransition.extend({
+      var ProjetTransition = Barba.BaseTransition.extend({
+        start: function() {
+          Promise
+               .all([this.newContainerLoading])
+               .then(this.step1.bind(this));
+        },
+        step1:function() {
+          var _this = this;
+          var $nouveau = $(this.newContainer);
+          var $ancien = $(this.oldContainer);
 
+          $ancien.find('.projets__item').addClass('animated fadeOutLeftBig');
+          $ancien.find('.projets__item').addClass('animated fadeOutRightBig');
+
+          setTimeout(function(){
+            //$ancien.hide();
+          }, 1000);
+
+
+          setTimeout(function(){
+            $nouveau.css({
+              visibility : 'visible'
+            });
+              _this.done();
+          }, 1200);
+
+
+        },
+
+
+      });
+
+
+      var SectionsTransition = Barba.BaseTransition.extend({
 
         start: function() {
         console.log ('TRANSITION -> start()');
@@ -112,7 +157,6 @@ var website = website || {};
                .then(this.step2.bind(this));
 
         },
-
 
         step1: function() {
           console.log ('TRANSITION -> step1()');
@@ -227,9 +271,44 @@ var website = website || {};
 
 
 
+    privates.cloneElement = function(element){
+
+      // Determine la position relative au viewport de l'element d'origine
+      var viewportOffset = element.getBoundingClientRect();
+      var clone = element.cloneNode(true);
+
+      clone.style.position = "fixed";
+      clone.style.left = viewportOffset.left+'px';
+      clone.style.top = viewportOffset.top+'px';
+      clone.style.width = viewportOffset.width+'px';
+      clone.style.height = viewportOffset.height+'px';
+      clone.setAttribute('href', '#nogo');
+
+      clone.className += " projet__lien__clone";
+
+      // Append the cloned ;
+      document.body.appendChild(clone);
+
+
+      setTimeout(function(){
+
+        clone.style.left = '0px';
+        clone.style.top = '0px';
+        clone.style.width = '100%';
+        clone.style.height = '380px';
+
+        //clone.style.position = "absolute";
+      }, 100);
+
+
+
+
+    };
+
     publics.prepare_home = function(){
         privates.checkScript('_assets/js/home.min.js');
     };
+
 
 
 

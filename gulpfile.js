@@ -84,7 +84,7 @@ var lazypipe = require('lazypipe');
 
 gulp.task('build-js', function(){
   console.log('BUIL ===================== TACHES : prepare-js =======================');
-  return gulp.src('src/*.html')
+  return gulp.src('src/**/*.html')
     .pipe(plugins.plumber())
     .pipe(useref())
     .pipe(useref({}, lazypipe().pipe(sourcemaps.init, { loadMaps: true })))
@@ -226,25 +226,9 @@ var critical = require('critical').stream;
 gulp.task('critical', function () {
     console.log('===================== TACHES : CRITICAL =======================');
     return gulp.src('tmp/*.html')
-<<<<<<< HEAD
-      .pipe(plugins.plumber())
-      .pipe(critical({
-        base: 'tmp/',
-        inline: true,
-        minify:true,
-        extract: false,
-        css: ['dist/_assets/css/styles.css']}))
-      .on('error', function(err) {
-        gutil.log(gutil.colors.red(err.message));
-      })
-      .pipe(gulp.dest('dist'))
 
-      // Synchronisation du navigateur
-      // .pipe(browserSync.reload({
-      //   stream: true
-      // }))
-      ;
-=======
+      .pipe(plugins.plumber())
+
         .pipe(critical({
           base: 'tmp/',
           inline: true,
@@ -265,7 +249,7 @@ gulp.task('critical', function () {
         //   stream: true
         // }))
         ;
->>>>>>> 0ad7f9491468d60f6f915edebe475f33e1859b46
+
 });
 
 
@@ -303,7 +287,7 @@ gulp.task('cleanhtml', function(){
 gulp.task('watch', ['browserSync' ] , function(){
   gulp.watch('src/_assets/**/*.scss', ['build-styles']);
   // Other watchers
-  gulp.watch('src/{,_includes/}*.html',{cwd:'./'},  ['build-html'] , browserSync.reload  );
+  gulp.watch('src/{,projets/}{,_includes/}*.html',{cwd:'./'},  ['build-html'] , browserSync.reload  );
 
   gulp.watch('src/_assets/{,img/}**/*.+(png|jpg|gif)',{cwd:'./'}, ['copy-img-tmp'] , browserSync.reload);
   gulp.watch('src/_assets/{,svg/}**/*.svg',{cwd:'./'}, ['copy-svg-tmp'] , browserSync.reload);
@@ -329,11 +313,7 @@ gulp.task('browserSync', function() {
 // Synchronisation du navigateur
 gulp.task('browserSyncProd', function() {
   browserSync.init({
-<<<<<<< HEAD
-    browser: ["chrome", "edge"],
-=======
     browser: ["chrome", "firefox"],
->>>>>>> 0ad7f9491468d60f6f915edebe475f33e1859b46
     server: {
       baseDir: 'dist'
     },

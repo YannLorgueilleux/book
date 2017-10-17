@@ -11,15 +11,7 @@
 
 .projets{
 
-  img {
-      display: block;
-      -webkit-transition: all .5s ease 0s;
-      transition: all .5s ease 0s;
-      -webkit-transform: scale(1);
-      -ms-transform: scale(1);
-      transform: scale(1);
-      opacity: 1;
-  }
+
 
   // LES ELEMENTS (projets)
   &__item {
@@ -46,11 +38,15 @@
 
 
 
-.projet__lien {
+.projet__lien,
+.projet__bandeau {
   position: relative;
   display: block;
   overflow: hidden;
   text-decoration: none;
+  height: 300px;
+
+  transition: all .5s ease 0s;
 
   &:before {
       content:" ";
@@ -67,13 +63,36 @@
       background: linear-gradient(to bottom,transparent 0,rgba(0,0,0,.04) 11%,rgba(0,0,0,.13) 26%,rgba(0,0,0,.42) 65%,rgba(0,0,0,.54) 86%,rgba(0,0,0,.6) 98%,rgba(0,0,0,.54) 100%);
   }
 
-  &:hover {
+
+  img {
+      float: right;
+      display: block;
+      -webkit-transition: all .5s ease 0s;
+      transition: all .5s ease 0s;
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      transform: scale(1);
+      opacity: .8;
+
+      width: auto;
+      height: 100%;
+  }
+
+
+
+  &:hover,
+  &.projet__lien__clone {
+
+    background:$coul-3--black;
+    height: 380px;
+
+
 
     img {
-        -webkit-transform: scale(1.2);
-        -ms-transform: scale(1.2);
-        transform: scale(1.2);
-        opacity: .15;
+        -webkit-transform: scale(1.4);
+        -ms-transform: scale(1.4);
+        transform: scale(1.4);
+        opacity: 1;
     }
 
     &:before {
