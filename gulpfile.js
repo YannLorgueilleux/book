@@ -84,7 +84,7 @@ var lazypipe = require('lazypipe');
 
 gulp.task('build-js', function(){
   console.log('BUIL ===================== TACHES : prepare-js =======================');
-  return gulp.src('src/*.html')
+  return gulp.src('src/**/*.html')
     .pipe(plugins.plumber())
     .pipe(useref())
     .pipe(useref({}, lazypipe().pipe(sourcemaps.init, { loadMaps: true })))
@@ -126,6 +126,7 @@ gulp.task('inserthtml', function () {
 gulp.task('copy-includes-tmp', function(){
   console.log('===================== TACHES : COPY INCLUDES VERS TMP=======================');
   gulp.src(['src/_includes/**/*'])
+    .pipe(plugins.plumber())
     .pipe(gulp.dest('tmp/_includes'))
     // Synchronisation du navigateur
     //.pipe(browserSync.reload({stream: true}));
@@ -136,6 +137,7 @@ gulp.task('copy-includes-tmp', function(){
 gulp.task('copy-img-tmp', function(){
   console.log('===================== TACHES : COPY IMAGES VERS TMP =======================');
   gulp.src(['src/_assets/img/**/*'])
+    .pipe(plugins.plumber())
     .pipe(gulp.dest('tmp/_assets/img'))
     // Synchronisation du navigateur
     .pipe(browserSync.reload({stream: true}));
@@ -145,7 +147,7 @@ gulp.task('copy-img-tmp', function(){
 gulp.task('copy-svg-tmp', function(){
   console.log('===================== TACHES : COPY SVG VERS TMP=======================');
   gulp.src(['src/_assets/svg/**/*.svg'])
-    //.pipe(svgmin())
+    .pipe(plugins.plumber())
     .pipe(gulp.dest('tmp/_assets/svg/'))
     // Synchronisation du navigateur
     .pipe(browserSync.reload({stream: true}));
@@ -186,7 +188,8 @@ gulp.task('minifycss', function () {
 const imagemin = require('gulp-imagemin');
 gulp.task('minImages', () =>
    gulp.src('tmp/_assets/img/**/*.+(png|jpg|gif)')
-       .pipe(imagemin([
+      .pipe(plugins.plumber())
+      .pipe(imagemin([
           imagemin.gifsicle({interlaced: true}),
           imagemin.jpegtran({progressive: true}),
           imagemin.optipng({optimizationLevel: 5}),
@@ -202,8 +205,8 @@ gulp.task('minImages', () =>
 //const imagemin = require('gulp-imagemin');
 gulp.task('minsvg', () =>
    gulp.src('tmp/_assets/svg/**/*.svg)')
-
-       .pipe(gulp.dest('dist/_assets/svg'))
+      .pipe(plugins.plumber())
+      .pipe(gulp.dest('dist/_assets/svg'))
 );
 
 
@@ -223,6 +226,9 @@ var critical = require('critical').stream;
 gulp.task('critical', function () {
     console.log('===================== TACHES : CRITICAL =======================');
     return gulp.src('tmp/*.html')
+
+      .pipe(plugins.plumber())
+
         .pipe(critical({
           base: 'tmp/',
           inline: true,
@@ -243,6 +249,7 @@ gulp.task('critical', function () {
         //   stream: true
         // }))
         ;
+
 });
 
 
@@ -251,6 +258,7 @@ var minify = require('gulp-minify');
 
 gulp.task('min-js', function() {
   gulp.src('tmp/_assets/js/*.js')
+    .pipe(plugins.plumber())
     .pipe(minify())
     .pipe(gulp.dest('dist/_assets/js'))
 });
@@ -265,6 +273,7 @@ var htmlmin = require('gulp-htmlmin');
 
 gulp.task('cleanhtml', function(){
   gulp.src('tmp/**/*.html')
+    .pipe(plugins.plumber())
     .pipe(cleanhtml())
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('dist'));
@@ -278,7 +287,7 @@ gulp.task('cleanhtml', function(){
 gulp.task('watch', ['browserSync' ] , function(){
   gulp.watch('src/_assets/**/*.scss', ['build-styles']);
   // Other watchers
-  gulp.watch('src/{,_includes/}*.html',{cwd:'./'},  ['build-html'] , browserSync.reload  );
+  gulp.watch('src/{,projets/}{,_includes/}*.html',{cwd:'./'},  ['build-html'] , browserSync.reload  );
 
   gulp.watch('src/_assets/{,img/}**/*.+(png|jpg|gif)',{cwd:'./'}, ['copy-img-tmp'] , browserSync.reload);
   gulp.watch('src/_assets/{,svg/}**/*.svg',{cwd:'./'}, ['copy-svg-tmp'] , browserSync.reload);
@@ -341,10 +350,10 @@ gulp.task('build', function(callback) {
 // cd C:\wamp64\www\yann-lorgueilleux.info\book && gulp prod
 //gulp.task('prod', [ 'minifycss' , 'critical' , 'browserSyncProd']);
 
-
+// 'critical' ,
 gulp.task('prod', function(callback) {
   runSequence('minifycss',
-              ['critical' ,'minImages','minsvg'],
+              ['minImages','minsvg'],
               'min-js',
 
               'browserSyncProd',
