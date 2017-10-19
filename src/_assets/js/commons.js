@@ -392,7 +392,7 @@ var website = website || {};
 
         website.barba();
         //website.effet_lazy();
-
+        Menu.init();
         //website.pageHome.init();
         //pageProjets.init();
     };
