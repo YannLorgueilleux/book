@@ -13,21 +13,22 @@
 
 
 
-
-
-@import "book/interface";
-@import "book/menu-global";
-@import "book/bg-vid";
-@import "book/stikers";
-@import "book/tech";
-
-@import "book/projets";
-
-
 @import "book/_couleurs";
 
 
+
+.font-1--thin    {
+  font-family: 'Titillium Web', sans-serif;
+  font-weight: 200;
+}
+
+.font-1--black  {
+  font-family: 'Titillium Web', sans-serif;
+  font-weight: 900;
+}
+
 .animated {visibility: visible !important;}
+
 .identite {
   color: #fff;
   font-family: 'Titillium Web', sans-serif;
@@ -97,3 +98,13 @@
 
 
 }
+
+
+@import "book/interface";
+@import "book/header";
+@import "book/menu-global";
+@import "book/bg-vid";
+@import "book/stikers";
+@import "book/tech";
+
+@import "book/projets";

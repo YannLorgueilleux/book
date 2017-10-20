@@ -3,7 +3,7 @@ var Menu = ( function (self) {
 
   var menu = document.getElementById("menu-global");
 
-  afficheMenu = function () {
+  var afficheMenu = function () {
     setTimeout(function(){
       //$ancien.hide();
       console.log (menu);

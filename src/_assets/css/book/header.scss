@@ -1,0 +1,32 @@
+
+@import "book/_couleurs";
+
+.header {
+
+
+
+  &__signature{
+
+  display: flex;
+
+  }
+
+
+  &__logo{
+    float:left;
+
+    width:60px;
+    height:60px;
+    background:$coul-1 ;
+  }
+
+  &__identite {
+    color:$coul-1 ;
+  }
+
+  &__accroche{
+  @extend .font-1--thin;
+  }
+
+
+}
