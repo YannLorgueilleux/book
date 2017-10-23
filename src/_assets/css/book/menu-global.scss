@@ -1,7 +1,72 @@
+@import "book/_couleurs";
 
 
-.menu-global {
+$mobile: "only screen and (max-width : 480px)";
+
+
+
+#menu {
   visibility: hidden;
   position: absolute;
-  z-index: 2
+  top:0;
+  right:0;
+  z-index: 2;
+
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+
+
+  @media #{$mobile} {
+
+    position:fixed;
+    width:60px;
+    height:60px;
+
+    background:$coul-3;
+  }
+}
+
+.menu-global {
+
+  @media #{$mobile} {display:none}
+
+  &__hamburger {
+  display: none;
+  position: absolute;
+  right: 0;
+
+  width:60px;
+  height:60px;
+
+  @media #{$mobile} {
+    display: block;
+    background: $coul-2;
+  }
+ }
+}
+
+
+
+
+body.js-menu {
+
+  #menu {
+
+    width:100vw;
+    height:100vh;
+
+
+    & .menu-global {
+    display: block;
+
+
+     &__hamburger {
+      display: block;
+      background: $coul-1;
+      left:0 ;
+      bottom:12px;
+      margin:auto;
+     }
+    }
+  }
+
 }

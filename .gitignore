@@ -12,7 +12,7 @@ bin-release/
 node_modules/**/*
 tmp/**/*
 dist/**/*
-
+src/_assets/videos/*
 
 .gulp-scss-cache
 .sass-cache

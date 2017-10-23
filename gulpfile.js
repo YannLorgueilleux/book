@@ -153,6 +153,15 @@ gulp.task('copy-svg-tmp', function(){
     .pipe(browserSync.reload({stream: true}));
 });
 
+// Tâche dupliques les Videos
+gulp.task('copy-videos-tmp', function(){
+  console.log('===================== TACHES : COPY VIDEOS VERS TMP=======================');
+  gulp.src(['src/_assets/videos/**/*'])
+    .pipe(plugins.plumber())
+    .pipe(gulp.dest('tmp/_assets/videos/'))
+    // Synchronisation du navigateur
+    .pipe(browserSync.reload({stream: true}));
+});
 
 
 // generate a todo.md from your javascript files
@@ -313,7 +322,7 @@ gulp.task('browserSync', function() {
 // Synchronisation du navigateur
 gulp.task('browserSyncProd', function() {
   browserSync.init({
-    browser: ["chrome", "firefox"],
+    browser: ["chrome"],
     server: {
       baseDir: 'dist'
     },
@@ -331,7 +340,7 @@ gulp.task('build-styles', function(callback) {
 });
 
 gulp.task('copy-ressources', function(callback) {
-  runSequence( [ 'copy-svg-tmp' ] , ['copy-img-tmp'],  callback);
+  runSequence( [ 'copy-svg-tmp' , 'copy-videos-tmp' ] , ['copy-img-tmp'],  callback);
 });
 
 gulp.task('build-html', function(callback) {
@@ -354,8 +363,8 @@ gulp.task('build', function(callback) {
 gulp.task('prod', function(callback) {
   runSequence('minifycss',
               ['minImages','minsvg'],
-              'min-js',
-
+              ['min-js'],
+              'critical',
               'browserSyncProd',
               callback);
 });
