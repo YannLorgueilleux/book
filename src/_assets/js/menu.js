@@ -1,4 +1,7 @@
 // MODULE MENU GLOBAL
+// Dépendances -> utilitaires/classies.js
+
+
 var Menu = ( function (self) {
 
   var menu = document.getElementById("menu");
@@ -17,10 +20,10 @@ var Menu = ( function (self) {
 
   burger.addEventListener("click",function(e){
 
-      if(website.hasClass( website.body , 'js-menu' )){
-        website.removeClass( website.body , 'js-menu' );
+      if(classies.hasClass( website.body , 'js-menu' )){
+        classies.removeClass( website.body , 'js-menu' );
       }else{
-        website.addClass( website.body , 'js-menu' );
+        classies.addClass( website.body , 'js-menu' );
       }
 
   },false);

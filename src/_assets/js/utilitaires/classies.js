@@ -3,9 +3,9 @@
 //suivant ->  https://jaketrent.com/post/addremove-classes-raw-javascript/
 
 
-var website = website || {};
+var classies = classies || {};
 
-var website = (function (publics) {
+var classies = (function (publics) {
 
     "use strict";
     //var privates = {};
@@ -30,4 +30,4 @@ var website = (function (publics) {
 
     return publics;
 
-  })( website || {} );
+  })( classies || {} );

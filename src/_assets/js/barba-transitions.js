@@ -1,6 +1,6 @@
 // TRANSITIONS DE BARBA
 // - Dépendance : barba.js
-
+//              : utilitaires/classies.js
 
 var website = website || {};
 
@@ -179,7 +179,7 @@ var website = (function (publics) {
             for (var i = 0; i < arrayLength; i++) {
                 //alert(children[i]);
                 //Do something
-                publics.addClass (children[i],'animated zoomOutLeft');
+                classies.addClass (children[i],'animated zoomOutLeft');
             }
 
             console.log(children);

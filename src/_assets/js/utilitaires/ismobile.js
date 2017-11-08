@@ -1,7 +1,7 @@
 
 //UTILITARE : detect le matos
 //suivant -> http://www.ckdevelop.org/index.php?article12/detecter-user-agent-pour-mobile-est-tablette-en-javascript
-// dependances -> class.js
+// dependances -> classies.js
 
 var website = website || {};
 
@@ -22,15 +22,15 @@ var website = (function (publics) {
 
           if ( ((screen.width  >= 480) && (screen.height >= 800)) || ((screen.width  >= 800) && (screen.height >= 480)) || navigator.userAgent.match(/ipad/gi) ) {
               publics.isTablet = true;
-              website.addClass( publics.body , 'tablette' );
+              classies.addClass( publics.body , 'tablette' );
           } else {
               publics.isMobile = true;
-              website.addClass( publics.body , 'mobile' );
+              classies.addClass( publics.body , 'mobile' );
           }
 
         }else{
           publics.isDesktop = true;
-            website.addClass( publics.body , 'desktop' );
+            classies.addClass( publics.body , 'desktop' );
         }
 
 

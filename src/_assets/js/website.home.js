@@ -41,8 +41,26 @@
         //website.home.init_fullpage();
         //website.effet_lazy();
         website.lazy();
+
+
+
     };
 
 
 
 }(website.home = {}));
+
+
+
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var container = document.getElementById("demodrag");
+      dragend = new Dragend(container, {
+        afterInitialize: function() {
+          container.style.visibility = "visible";
+        }
+      });
+    }, false)
