@@ -1,6 +1,6 @@
 // TRANSITIONS DE BARBA
 // - Dépendance : barba.js
-
+//              : utilitaires/classies.js
 
 var website = website || {};
 
@@ -23,17 +23,16 @@ var website = (function (publics) {
         switch (transition)
         {
            case 'section':
-            //$('body').addClass('SectionTransition');
-            console.log("add body class");
              Barba.Pjax.getTransition = function() {
                return SectionsTransition;
              };
            break;
 
            case 'projet':
-              privates.cloneElement(element);
-
-             Barba.Pjax.getTransition = function(clone) {
+           // stock l'element cliquer en global
+            publics.elementClic = element;
+            //lance les transitions
+             Barba.Pjax.getTransition = function() {
                return ProjetTransition;
              };
            break;
@@ -79,6 +78,7 @@ var website = (function (publics) {
         onEnter: function() {
             console.log ('PROJETS | VIEWS ->  onEnter() // The new Container is ready and attached to the DOM.');
             //alert ('The new Container is ready and attached to the DOM');
+            website.prepare_projets();
         },
         onEnterCompleted: function() {
             console.log  ('PROJETS | VIEWS ->  onEnterCompleted()   // The Transition has just finished..');
@@ -90,6 +90,7 @@ var website = (function (publics) {
         },
         onLeaveCompleted: function() {
             console.log ('PROJETS | VIEWS ->  onLeaveCompleted() // The Container has just been removed from the DOM.');
+
         }
       });
 
@@ -110,6 +111,7 @@ var website = (function (publics) {
         },
         onLeaveCompleted: function() {
             console.log ('PROJET | VIEWS ->  onLeaveCompleted() // The Container has just been removed from the DOM.');
+
         }
       });
 
@@ -119,35 +121,78 @@ var website = (function (publics) {
       var ProjetTransition = Barba.BaseTransition.extend({
         start: function() {
           Promise
-               .all([this.newContainerLoading])
-               .then(this.step1.bind(this));
+               .all([this.newContainerLoading, , this.step1() ])
+               .then(this.step2.bind(this));
         },
         step1:function() {
           var _this = this;
-          var nouveau = this.newContainer;
           var ancien = this.oldContainer;
 
-          $ancien.find('.projets__item').addClass('animated fadeOutLeftBig');
-          $ancien.find('.projets__item').addClass('animated fadeOutRightBig');
+
+          var elementClic = website.elementClic;
+          //var image = elementClic.getElementsByTagName('img')[0];
+          privates.cloneElement(elementClic);
+
+
+          privates.masque_header();
+          privates.masque_elements(ancien);
 
           setTimeout(function(){
-            //$ancien.hide();
-          }, 1000);
+            var clone = document.getElementById('clone');
+            publics.addClass(clone , 'pleinePage');
+          }, 200);
 
-
-          setTimeout(function(){
-            $nouveau.css({
-              visibility : 'visible'
-            });
-              _this.done();
-          }, 1200);
+          setTimeout(function () {
+            var body = document.getElementsByTagName('body')[0];
+            publics.addClass( body ,'loading');
+          }, 600 );
 
 
         },
 
+        step2:function() {
 
+          var _this = this;
+          var nouveau = this.newContainer;
+          var ancien = this.oldContainer;
+          var body = document.getElementsByTagName('body')[0];
+
+          publics.addClass(nouveau , 'nouvellePage');
+
+          setTimeout(function(){
+            // Cache l'ancienne Page
+            ancien.style.display = 'none';
+            // affiche la nouvelle Page
+            nouveau.style.visibility = 'visible';
+          }, 1600);
+
+
+          setTimeout(function(){
+            // Masque le panneau Loading
+            publics.addClass(body , 'loadingComplete');
+          }, 1800, body);
+
+
+          setTimeout(function(){
+            // Supprime le panneau Loading
+            publics.removeClass( body ,'loading loadingComplete');
+
+            privates.destroyClone();
+
+
+            // Affiche le menu
+            privates.affiche_header();
+
+            _this.done();
+
+          }, 2200 , body);
+
+        }
       });
 
+      //  ====================================
+      // TRANSITIONS SECTIONS
+      // =====================================
 
       var SectionsTransition = Barba.BaseTransition.extend({
 
@@ -158,11 +203,24 @@ var website = (function (publics) {
           Promise
                .all([this.newContainerLoading, this.step1() ])
                .then(this.step2.bind(this));
-
         },
 
         step1: function() {
           console.log ('TRANSITION -> step1()');
+
+          var ancien = this.oldContainer;
+          publics.addClass(ancien , 'anciennePage');
+
+
+          privates.masque_header();
+          privates.masque_elements(ancien);
+
+
+          setTimeout(function () {
+            var body = document.getElementsByTagName('body')[0];
+            publics.addClass( body ,'loading');
+          }, 400 );
+
 
         },
 
@@ -171,30 +229,34 @@ var website = (function (publics) {
             var _this = this;
             var nouveau = this.newContainer;
             var ancien = this.oldContainer;
+            var body = document.getElementsByTagName('body')[0];
 
-            //https://stackoverflow.com/questions/16302045/finding-child-element-of-parent-pure-javascript
-            var children = ancien.querySelectorAll( '.titre-principal');
-
-            var arrayLength = children.length;
-            for (var i = 0; i < arrayLength; i++) {
-                //alert(children[i]);
-                //Do something
-                publics.addClass (children[i],'animated zoomOutLeft');
-            }
-
-            console.log(children);
+            publics.addClass(nouveau , 'nouvellePage');
 
             setTimeout(function(){
-              //ancien.hide();
-            }, 1000);
-
-
-            setTimeout(function(){
-            //  nouveau.css({
-            //    visibility : 'visible'
-            //  });
-                _this.done();
+              // Cache l'ancienne Page
+              ancien.style.display = 'none';
+              // affiche la nouvelle Page
+              nouveau.style.visibility = 'visible';
             }, 1200);
+
+
+            setTimeout(function(){
+              // Masque le panneau Loading
+              publics.addClass(body , 'loadingComplete');
+            }, 1800, body);
+
+
+            setTimeout(function(){
+              // Supprime le panneau Loading
+              publics.removeClass( body ,'loading loadingComplete');
+
+              // Affiche le menu
+              privates.affiche_header();
+
+              _this.done();
+
+            }, 2200 , body);
 
 
         }
@@ -207,6 +269,138 @@ var website = (function (publics) {
 
     };
 
+
+    privates.affiche_header = function(){
+      var header = document.querySelector('.header');
+      publics.addClass(header,'fadeInDown');
+      publics.removeClass(header,'fadeOutUp');
+    }
+
+
+    privates.masque_header = function(){
+      var header = document.querySelector('.header');
+      publics.addClass(header,'animated fadeOutUp');
+    }
+
+
+    privates.masque_elements = function(containerCible){
+
+      //https://stackoverflow.com/questions/16302045/finding-child-element-of-parent-pure-javascript
+      var sortieGauche = containerCible.querySelectorAll('.sortieGauche');
+      var arraySortieGaucheLength = sortieGauche.length;
+
+      for (var i = 0; i < arraySortieGaucheLength; i++) {
+        //console.log(sortieDown[i]);
+        setTimeout(function (ele) {
+            console.log(ele);
+
+            publics.addClass(ele,'animated fadeOutLeftBig');
+        }, 50 * i, sortieGauche[i] );
+      }
+
+
+
+      //https://stackoverflow.com/questions/16302045/finding-child-element-of-parent-pure-javascript
+      var sortieHaut = containerCible.querySelectorAll('.sortieHaut');
+      var arraySortieHautLength = sortieHaut.length;
+
+      for (var i = 0; i < arraySortieHautLength; i++) {
+        //console.log(sortieDown[i]);
+        setTimeout(function (ele) {
+            console.log(ele);
+
+            publics.addClass(ele,'animated fadeOutUp');
+        }, 50 * i, sortieHaut[i] );
+      }
+
+
+      //https://stackoverflow.com/questions/16302045/finding-child-element-of-parent-pure-javascript
+      var sortieBas = containerCible.querySelectorAll('.sortieBas');
+      var arraySortieBasLength = sortieBas.length;
+
+      for (var i = 0; i < arraySortieBasLength; i++) {
+        //console.log(sortieDown[i]);
+        setTimeout(function (ele) {
+            console.log(ele);
+
+            publics.addClass(ele,'animated fadeOutDown');
+        }, 50 * i, sortieBas[i] );
+      }
+
+
+
+    }
+
+
+
+      privates.cloneElement = function(element){
+
+        // Determine la position relative au viewport de l'element d'origine
+        var viewportOffset = element.getBoundingClientRect();
+        //var clone = element.cloneNode(true);
+        var clone = document.createElement('div');
+        var image = element.getElementsByTagName('img')[0];
+        var imageSrc = image.src;
+
+        clone.id = "clone";
+        clone.style.position = "fixed";
+        clone.style.left = viewportOffset.left+'px';
+        clone.style.top = viewportOffset.top+'px';
+        clone.style.right = viewportOffset.right+'px';
+        clone.style.bottom = viewportOffset.bottom+'px';
+
+
+        clone.style.width = viewportOffset.width+'px';
+        clone.style.height = viewportOffset.height+'px';
+
+
+
+
+        // Creation du Div image
+        var imageDiv = document.createElement('div');
+        imageDiv.style.backgroundImage = "url("+imageSrc+")";
+        imageDiv.className = 'imageClone';
+        clone.appendChild(imageDiv);
+
+
+        // Append the cloned ;
+        document.body.appendChild(clone);
+
+
+        // setTimeout(function(){
+        //
+        //    clone.style.left = '0px';
+        //    //clone.style.right = '0px';
+        //    clone.style.top = '0px';
+        //    //clone.style.bottom = '0px';
+        //    clone.style.width = 'auto';
+        //    clone.style.height = '100%';
+        //    clone.style.opacity = '0.1';
+        //   //clone.style.position = "absolute";
+        // }, 400);
+
+      };
+
+
+
+      privates.destroyClone = function () {
+
+        var clone = document.getElementById('clone');
+
+
+        if(clone){
+          console.log(clone);
+
+          //alert(clone);
+          clone.parentNode.removeChild(clone);
+
+        }
+      };
+
+
+      publics.coupe_loading = function () {
+        window.history.back();
+      }
 
     return publics;
 

@@ -1,7 +1,7 @@
 // UTILITAIRE LazyLoad des image/frame/video/script
 // Suivant -> http://dinbror.dk/blog/blazy/?ref=github#Callback
 // - Dépendance : blazy-master
-
+//                utilitaires/classies.js
 
 var website = website || {};
 
@@ -18,7 +18,7 @@ var website = (function (publics) {
           // CALLBACK
           success: function(ele){
               // Image has loaded
-              publics.addClass(ele, 'animated fadeInUp delayEffect');
+              classies.addClass(ele, 'animated fadeInUp delayEffect');
           },
 
           error: function(ele, msg){

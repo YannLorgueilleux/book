@@ -197,13 +197,13 @@ gulp.task('minifycss', function () {
 const imagemin = require('gulp-imagemin');
 gulp.task('minImages', () =>
    gulp.src('tmp/_assets/img/**/*.+(png|jpg|gif)')
-      .pipe(plugins.plumber())
-      .pipe(imagemin([
-          imagemin.gifsicle({interlaced: true}),
-          imagemin.jpegtran({progressive: true}),
-          imagemin.optipng({optimizationLevel: 5}),
-          imagemin.svgo({plugins: [{removeViewBox: true}]})
-      ]))
+      // .pipe(plugins.plumber())
+      // .pipe(imagemin([
+      //     imagemin.gifsicle({interlaced: true}),
+      //     imagemin.jpegtran({progressive: true}),
+      //     imagemin.optipng({optimizationLevel: 5}),
+      //     imagemin.svgo({plugins: [{removeViewBox: true}]})
+      // ]))
        .pipe(gulp.dest('dist/_assets/img'))
 );
 

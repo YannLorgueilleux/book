@@ -1,0 +1,15 @@
+// transitions css3
+
+@mixin transitions  { transition:  all 0.3s ease-in ;}
+
+
+@mixin transitionsSlow  { transition : all 0.8s ease-in ; }
+
+@mixin transitionsSpeed  { transition : all 0.2s ease-in ; }
+
+
+//slow puis speed
+@mixin transitionsSlowSpeed { transition :all 1s cubic-bezier(0.98, 0.02, 1, 1) }
+
+//speed puis slow
+@mixin transitionsSpeedSlow { transition :all 0.5s cubic-bezier(0.01, 1.13, 1, 1) }

@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>titre</title>
+    <title>intro</title>
 
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- @@include _includes/header__communs.html {} -->
 
-    <link rel="stylesheet" href="_assets/css/styles.css">
+
   </head>
   <body class="home">
 
@@ -21,23 +19,28 @@
         	<div class="section" style="min-height:100vh">
 
 
-            <img class="indicateur-scrolldown animated fadeInUp" src="_assets/img/interface/down-fff.png" />
+            <img class="indicateur-scrolldown " src="_assets/img/interface/down-fff.png" />
 
             <!-- @@include _includes/bg-vid.html {"page":"home"} -->
 
             <div class="grid-container">
               <div class="grid-x">
-                <div class="small-12 medium-6 cell">
-                  <div id="demo"></div>
-                  <h1 class="identite animated fadeInDown">Yann LORGUEILLEUX</h1>
-                  <h2 class="titre-principal animated fadeInDownBig">designer UX / UI</h2>
-                  <h2 class="titre-principal animated fadeInDown">integrateur Web</h2>
+                <div class="small-12 medium-12 cell">
+
+                  <!--<div id="demo" style="">
+                      <img src="http://via.placeholder.com/350x150">
+                  </div>-->
+
+                  <h1 class="identite ">Yann LORGUEILLEUX</h1>
+                  <h2 class="titre-principal">designer UX / UI</h2>
+                  <h2 class="titre-principal">integrateur Web</h2>
                   <p>Parcequ'un bon design ce doit de connaitres les contraintes techniques pour les transcender</p>
                   <p>Parcequ'un intégrateur web </p>
 
-  <!--
+
+<!--
                   <video loop autoplay>
-                  <source src="_assets/videos/video-ms.webm" type="video/webm">
+                  <source src="_assets/videos/loop.webm" type="video/webm">
                   <source src="_assets/videos/video-ms.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                   </video>
@@ -55,6 +58,8 @@
                   </video>
 -->
 
+
+
                 </div>
               </div>
             </div>
@@ -65,7 +70,25 @@
           </div>
 
 
+          <style>
 
+            #demodrag {
+              width:100%;
+              height:300px;
+              background: red;
+            }
+
+            .dragend-page{
+              width:400px;
+              height:300px;
+            }
+
+          </style>
+
+          <div id="demodrag">
+          <div class="dragend-page">page1</div>
+          <div class="dragend-page">page2</div>
+          </div>
 
 
 
@@ -99,21 +122,26 @@
   </div><!-- END : id="barba-wrapper" -->
 
 
+
+
+
+
+
     <!--build:js _assets/js/main.min.js -->
-    <!--<script type="text/javascript" src="_assets/_vendors/jQuery/jquery-3.2.1.min.js"></script>-->
     <script type="text/javascript" src="_assets/js/utilitaires/loadScripts.js"></script>
-    <script type="text/javascript" src="_assets/js/utilitaires/class.js"></script>
+    <script type="text/javascript" src="_assets/js/utilitaires/classies.js"></script>
     <script type="text/javascript" src="_assets/js/utilitaires/ismobile.js"></script>
 
+<!--
     <script type="text/javascript" src="_assets/js/utilitaires/lazy.js"></script>
-
-
+    <script type="text/javascript" src="_assets/_vendors/blazy-master/blazy.min.js"></script>
+-->
     <script type="text/javascript" src="_assets/_vendors/barba.js-master/dist/barba.min.js"></script>
     <script type="text/javascript" src="_assets/js/barba-transitions.js"></script>
 
 
 
-     <script type="text/javascript" src="_assets/_vendors/blazy-master/blazy.min.js"></script>
+
 
     <script type="text/javascript" src="_assets/js/menu.js"></script>
 
@@ -128,41 +156,11 @@
     <script type="text/javascript" src="_assets/_vendors/fullPage.js/dist/jquery.fullpage.js"></script>-->
 
     <!-- <script type="text/javascript" src="_assets/_vendors/smartscroll-master/smartscroll.min.js"></script> -->
-
+    <script type="text/javascript" src="_assets/_vendors/dragend-master/dist/dragend.min.js"></script>
     <script type="text/javascript" src="_assets/js/website.home.js"></script>
     <!-- endbuild -->
 
-<style>
-/*TODO: creer fichier sass pour la section */
-.section{
-  position:relative;
-  /*min-height: 100vh;*/
-}
-</style>
-    <script>
 
-
-
-
-
-      var options = {
-        mode: "set", // "vp", "set"
-        autoHash: true,
-        sectionScroll: true,
-        initialScroll: true,
-        keepHistory: false,
-        sectionWrapperSelector: ".section-wrapper",
-        sectionClass: "section",
-        animationSpeed: 300,
-        headerHash: "header",
-        breakpoint: null,
-        eventEmitter: null,
-        dynamicHeight: false
-      };
-    //  $.smartscroll(options);
-    </script>
-
-<div class="test"></div>
 
   </body>
 </html>

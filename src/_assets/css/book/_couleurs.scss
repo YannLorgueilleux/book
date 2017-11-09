@@ -1,5 +1,14 @@
-//  Gamme Couleurs
 
+@import "_transitions";
+
+//BreakPoints
+$mobile: "only screen and (max-width : 640px)";
+
+// Taille Modulables
+$module          :  54px;
+
+
+//  Gamme Couleurs
 
 $coul-1--thin    : #d8fbff;
 $coul-1--light   : #2df3ff;

@@ -8,7 +8,7 @@
 
 //VENDORS
 @import "../_vendors/animate.css/animate";
-@import "../_vendors/fullPage.js/dist/jquery.fullpage";
+//@import "../_vendors/fullPage.js/dist/jquery.fullpage";
 
 
 
@@ -17,30 +17,91 @@
 
 
 
-.font-1--thin    {
+
+body {
+  background:$coul-3--black;
+  overflow-x: hidden;
+}
+
+.slidee{
+    @include transitionsSpeedSlow;
+
+  &.scrolling{
+    transition : all 0s ease-in ;
+  }
+}
+
+
+
+.slidee li {
+    @include transitionsSpeedSlow;
+
+  &.scrolling{
+
+    transition :  all 0 ;
+    //padding: 8px !important;
+
+    //overflow: hidden;
+
+    & img{
+      @include transitionsSpeed ;
+          transform: scale(0.9);
+    }
+
+  }
+}
+
+
+.filetDevant {
+
+  &:before{
+    content:'';
+    border-top:1px solid #000;
+    display:inline-block;
+    width: 38px;
+    margin-right:4px;
+  }
+
+}
+
+
+@mixin font-1--thin    {
   font-family: 'Titillium Web', sans-serif;
   font-weight: 200;
 }
 
-.font-1--black  {
+
+@mixin font-1--black  {
   font-family: 'Titillium Web', sans-serif;
   font-weight: 900;
 }
+
+
+
+.superTitle{
+  @include font-1--black;
+  opacity: 0.2;
+  font-size: 258px;
+  position: absolute;
+  top: 0;
+  line-height: 100px;
+}
+
+
 
 .animated {visibility: visible !important;}
 
 .identite {
   color: #fff;
-  font-family: 'Titillium Web', sans-serif;
   font-size: 26px;
-  font-weight: 900;
+  @include font-1--black;
 }
 
 .titre-principal {
   color: #0a0a0a;
-  font-family: 'Titillium Web', sans-serif;
+
+  @include font-1--thin;
   font-size: 48px;
-  font-weight: 200;
   line-height: 0.8em;
 
 }
@@ -101,10 +162,15 @@
 
 
 @import "book/interface";
+@import "book/spinner";
 @import "book/header";
 @import "book/menu-global";
 @import "book/bg-vid";
+
 @import "book/stikers";
 @import "book/tech";
 
 @import "book/projets";
+@import "book/projet";
+
+@import "book/barba-transitions";

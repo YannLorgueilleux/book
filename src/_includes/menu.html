@@ -1,33 +1,55 @@
 
+
+
 <header class="header">
+  <div class="grid-container">
 
-  <div class="header__signature">
+    <div class="header__signature">
 
-    <div class="header__logo"></div>
-    <div>
-      <p class="identite header__identite ">Yann Lorgueilleux</p>
-      <p class="header__accroche">Designer UI UX / Intégrateur web</p>
+      <div class="header__logo"></div>
+      <div>
+        <p class="identite header__identite ">Yann Lorgueilleux</p>
+        <p class="header__accroche">Designer UI UX / Intégrateur web</p>
+      </div>
+
     </div>
 
+
+    <div id="menu">
+
+      <div id="burger" class="menu-global__hamburger"></div>
+
+      <ul id="menu-global" class="menu-global menu align-right" >
+        <li><a class="page0  page0--active-<!-- @@var active --> button"  href="/index.html"   data-transition='section'>home</a></li>
+        <li><a class="page2  page2--active-<!-- @@var active --> button"  href="/projets.html" data-transition='section'>projets</a></li>
+  <!--
+        <li><a class="page1  page1--active- button"  href="/page1.html"   data-transition='section'>nesw page 1</a></li>
+        <li><a class="page3  page3--active- button"  href="page3.html"   data-transition='section'>page 3</a></li>
+        <li><a class="page3  page3--active- button"  href="/webbook/"    data-transition='section'>Blog</a></li>
+        <li><a class="page3  page3--active- button"  href="/boite-outils.html" data-transition='section'>Boite à outils</a></li>
+        <li><a class="page3  page3--active- button"  href="/styles-guide.html" data-transition='section'>Styles Guide</a></li> -->
+     </ul>
+
+
+    </div>
   </div>
-
-
-  <div id="menu">
-
-    <div id="burger" class="menu-global__hamburger"></div>
-
-    <ul id="menu-global" class="menu-global menu align-right" >
-      <li><a class="page0  page0--active-<!-- @@var active --> button"  href="/index.html"   data-transition='section'>home</a></li>
-      <li><a class="page2  page2--active-<!-- @@var active --> button"  href="/projets.html" data-transition='section'>projets</a></li>
-<!--
-      <li><a class="page1  page1--active- button"  href="/page1.html"   data-transition='section'>nesw page 1</a></li>
-      <li><a class="page3  page3--active- button"  href="page3.html"   data-transition='section'>page 3</a></li>
-      <li><a class="page3  page3--active- button"  href="/webbook/"    data-transition='section'>Blog</a></li>
-      <li><a class="page3  page3--active- button"  href="/boite-outils.html" data-transition='section'>Boite à outils</a></li>
-      <li><a class="page3  page3--active- button"  href="/styles-guide.html" data-transition='section'>Styles Guide</a></li> -->
-   </ul>
-
-
-  </div>
-
 </header>
+
+
+<div id="spinner" class="spinner__container">
+  <input class="stopLoading" type="button" value="Annuler le chargement" onclick="javascript:website.coupe_loading();" />
+
+  <div class="spinner__signature">
+    <div class="spinner__logo"></div>
+    <div>
+      <p class="identite spinner__identite ">Yann Lorgueilleux</p>
+      <p class="accroche spinner__accroche">Designer UI UX / Intégrateur web</p>
+    </div>
+  </div>
+
+  <div class="wheel"></div>
+
+</div>
+
+<div id="cacheTransition">
+</div>

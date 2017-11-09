@@ -2,12 +2,23 @@
 @import "book/_couleurs";
 
 .header {
+  position: fixed;
+  top:0;
+  z-index:10;
+  width: 100vw;
+  padding: $module/3;
+//  background-color: #fff;
 
+
+    @media #{$mobile} {
+      padding:0;
+    }
 
 
   &__signature{
 
   display: flex;
+  float: left;
 
   }
 
@@ -15,21 +26,23 @@
   &__logo{
     float:left;
 
-    width:60px;
-    height:60px;
+    width:$module;
+    height:$module;
     background:$coul-1 ;
   }
 
   &__identite {
+    margin: 0 0 0 8px;
     color:$coul-1 ;
+    font-size: 18px;
+    text-align: left;
   }
 
   &__accroche{
-  @extend .font-1--thin;
+    @include font-1--thin;
+    margin: 0 0 0 8px;
+    text-align: left;
+    font-size: 16px;
   }
-
-
-
-
 
 }

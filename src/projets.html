@@ -9,11 +9,10 @@ https://justcoded.com/work/
 <html>
   <head>
     <title>projets</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="_assets/css/styles.css">
+  <!-- @@include _includes/header__communs.html {} -->
+
+
 
   </head>
   <body class="page-projets">
@@ -25,7 +24,78 @@ https://justcoded.com/work/
     <div id="barba-wrapper">
       <div class="barba-container"  data-namespace="projets">
 
-        <!-- @@include _includes/sommaire-projets.html {"page":"home"} -->
+
+      <div class="superTitle sortieHaut">Projets</div>
+
+        <div id="frame" class="frame">
+        	<ul class="slidee">
+
+            <li style="margin-left:120px;" class="sortieGauche">
+              <a href="/projets/maison-services.html" class="projet__lien" data-transition="projet">
+                <img class="" src="/_assets/img/projets/chalandise/ecran-chalandise.jpg" width="640" height="480" />
+                <div class="text-box">
+                      <span class="caption"><strong>Wordpress</strong>, <strong>HTML</strong>, <strong>CSS</strong>, <strong>jQuery</strong>, <strong>Responsive</strong></span>
+                      <h2>Outils métier</h2>
+                      <i class="arrow-icon icon-arrow-right"><span class="hide-box">Arrow Right</span></i>
+                </div>
+                <h3 class="projet__lien__titre">Géo zones</h3>
+
+              </a>
+            </li>
+
+        		<li  class="sortieGauche">
+              <a href="/projets/maison-services.html" class="projet__lien" data-transition="projet">
+                <img class="" src="/_assets/img/projets/emploi/ecran-emploi.jpg" width="640" height="480" />
+                <div class="text-box">
+                      <span class="caption"><strong>Wordpress</strong>, <strong>HTML</strong>, <strong>CSS</strong>, <strong>jQuery</strong>, <strong>Responsive</strong></span>
+                      <h2>Site web</h2>
+                      <i class="arrow-icon icon-arrow-right"><span class="hide-box">Arrow Right</span></i>
+                </div>
+                <h3 class="projet__lien__titre">Offres d'emploi</h3>
+              </a>
+            </li>
+
+
+        		<li  class="sortieGauche">
+              <a href="/projets/maison-services.html" class="projet__lien" data-transition="projet">
+                <img class="" src="/_assets/img/projets/dev-reseau/ecran-dev-reseau.jpg" width="640" height="480" />
+                <div class="text-box">
+                      <span class="caption"><strong>Wordpress</strong>, <strong>HTML</strong>, <strong>CSS</strong>, <strong>jQuery</strong>, <strong>Responsive</strong></span>
+                      <h2>The Maple Building</h2>
+                      <i class="arrow-icon icon-arrow-right"><span class="hide-box">Arrow Right</span></i>
+                </div>
+                <h3 class="projet__lien__titre">Géo Stats</h3>
+              </a>
+            </li>
+
+
+            <li  class="sortieGauche">
+              <a href="/projets/maison-services.html" class="projet__lien" data-transition="projet">
+                <img class="" src="/_assets/img/projets/maison-et-services/ecran-maison-et-services.jpg" width="640" height="480" />
+                <div class="text-box">
+                      <span class="caption"><strong>Wordpress</strong>, <strong>HTML</strong>, <strong>CSS</strong>, <strong>jQuery</strong>, <strong>Responsive</strong></span>
+                      <h2>The Maple Building</h2>
+                      <i class="arrow-icon icon-arrow-right"><span class="hide-box">Arrow Right</span></i>
+                </div>
+                <h3 class="projet__lien__titre">Maison et Services</h3>
+              </a>
+            </li>
+
+
+            <li  class="sortieGauche">// 5</li>
+            <li  class="sortieGauche">// 6</li>
+        	</ul>
+        </div>
+
+
+      <div class="scrollbarContainer sortieBas">
+        <div id="scrollbar" class="scrollbar">
+          <div class="handle"></div>
+        </div>
+      </div>
+        <!-- @include _includes/sommaire-projets.html {"page":"home"} -->
+
+
 
     </div><!-- END : class="barba-container" -->
   </div><!-- END : id="barba-wrapper" -->
@@ -34,12 +104,22 @@ https://justcoded.com/work/
   <script type="text/javascript" src="_assets/js/main.min.js"></script>
 
 
+
+
+
+
   <!--build:js _assets/js/projets.min.js -->
+  <script type="text/javascript" src="_assets/_vendors/jQuery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="_assets/_vendors/sly-master/dist/sly.min.js"></script>
   <script type="text/javascript" src="_assets/js/website.projets.js"></script>
   <!-- endbuild -->
 
 
-
+<script>
+  window.onload = function(){
+    website.projets.init();
+  };
+</script>
 
   </body>
 </html>
